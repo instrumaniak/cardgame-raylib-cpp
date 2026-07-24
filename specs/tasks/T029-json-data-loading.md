@@ -1,6 +1,7 @@
 # T029: JSON Data Loading
 
 ## Status: pending
+## Phase: 6
 
 ## Goal
 Load game data (heroes, cards, items, levels) from JSON files.

@@ -1,6 +1,7 @@
 # T004: Resource Manager
 
 ## Status: pending
+## Phase: 1
 
 ## Goal
 Implement a ResourceManager class that loads and caches all game assets.

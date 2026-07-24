@@ -1,6 +1,7 @@
 # T019: Hero Panel
 
 ## Status: pending
+## Phase: 4
 
 ## Goal
 Left-side panel showing hero state (art, HP, shield, gold, inventory).

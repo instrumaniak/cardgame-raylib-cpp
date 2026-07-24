@@ -1,6 +1,7 @@
 # T030: Final Polish
 
 ## Status: pending
+## Phase: 6
 
 ## Goal
 Final build verification, bug fixes, and polish.

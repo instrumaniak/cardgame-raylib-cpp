@@ -1,6 +1,8 @@
 # T012: Card Effect Resolution
 
 ## Status: pending
+## Phase: 2
+## Critical: true
 
 ## Goal
 Card effect resolution for all card types (monster, shield, heal, gold, item, drop, place, biome, end).

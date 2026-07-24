@@ -1,6 +1,8 @@
 # T011: Combat System
 
 ## Status: pending
+## Phase: 2
+## Critical: true
 
 ## Goal
 Combat damage calculation with shield absorption and item modifiers.

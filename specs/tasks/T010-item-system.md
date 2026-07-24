@@ -1,6 +1,8 @@
 # T010: Item System
 
 ## Status: pending
+## Phase: 2
+## Critical: true
 
 ## Goal
 All 22 item effects and modifier calculation functions.

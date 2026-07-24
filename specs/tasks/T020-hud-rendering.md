@@ -1,6 +1,7 @@
 # T020: HUD Rendering
 
 ## Status: pending
+## Phase: 4
 
 ## Goal
 Top HUD showing level indicator, gold earned, and visual effects.

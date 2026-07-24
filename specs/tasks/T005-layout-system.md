@@ -1,6 +1,7 @@
 # T005: Layout System
 
 ## Status: pending
+## Phase: 1
 
 ## Goal
 Layout struct that handles letterbox scaling from 960x540 design resolution.

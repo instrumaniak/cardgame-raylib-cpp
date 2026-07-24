@@ -1,6 +1,7 @@
 # T017: Card Rendering
 
 ## Status: pending
+## Phase: 4
 
 ## Goal
 Draw any card type at any position with correct frame, sprite, and text.

@@ -1,6 +1,8 @@
 # T001: Project Setup
 
 ## Status: pending
+## Phase: 0
+## Critical: true
 
 ## Goal
 Set up project structure, Makefile, directory tree, .gitignore, and a stub main.cpp that opens a window.

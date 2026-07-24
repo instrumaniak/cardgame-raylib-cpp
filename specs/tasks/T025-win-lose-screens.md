@@ -1,6 +1,7 @@
 # T025: Win / Lose Screens
 
 ## Status: pending
+## Phase: 5
 
 ## Goal
 WinScreen and LoseScreen that show results and handle play again / main menu.

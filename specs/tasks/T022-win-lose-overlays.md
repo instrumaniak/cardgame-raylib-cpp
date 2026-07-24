@@ -1,6 +1,7 @@
 # T022: Win/Lose Overlays
 
 ## Status: pending
+## Phase: 4
 
 ## Goal
 Win and lose overlay screens with stats and action buttons.

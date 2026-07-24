@@ -1,6 +1,7 @@
 # T021: Menu Rendering
 
 ## Status: pending
+## Phase: 4
 
 ## Goal
 HOME screen UI (title, hero grid, start button, gold display).

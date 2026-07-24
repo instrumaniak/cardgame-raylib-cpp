@@ -1,6 +1,7 @@
 # T006: Screen Manager
 
 ## Status: pending
+## Phase: 1
 
 ## Goal
 Screen base class with virtual lifecycle and ScreenManager for state transitions.

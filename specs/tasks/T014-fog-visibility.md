@@ -1,6 +1,7 @@
 # T014: Fog Visibility
 
 ## Status: pending
+## Phase: 2
 
 ## Goal
 Fog visibility logic for row display based on monster-eye count.

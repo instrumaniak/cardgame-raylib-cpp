@@ -1,6 +1,8 @@
 # T016: Turn Flow Orchestrator
 
 ## Status: pending
+## Phase: 3
+## Critical: true
 
 ## Goal: Complete turn sequence that orchestrates all game logic modules into a playable game loop.
 

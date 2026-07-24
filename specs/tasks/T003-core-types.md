@@ -1,6 +1,8 @@
 # T003: Core Types
 
 ## Status: pending
+## Phase: 1
+## Critical: true
 
 ## Goal
 Define all core type definitions, enums, components, and entities for the game.

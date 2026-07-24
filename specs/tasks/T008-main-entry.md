@@ -1,6 +1,7 @@
 # T008: Main Entry
 
 ## Status: pending
+## Phase: 1
 
 ## Goal
 `main.cpp` that wires together all core systems.

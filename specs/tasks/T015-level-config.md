@@ -1,6 +1,7 @@
 # T015: Level Configuration
 
 ## Status: pending
+## Phase: 2
 
 ## Goal
 Level configuration helpers for all 6 levels and chest sub-locations.

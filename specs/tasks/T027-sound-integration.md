@@ -1,6 +1,7 @@
 # T027: Sound Integration
 
 ## Status: pending
+## Phase: 6
 
 ## Goal
 Sound effects triggered at correct game events.

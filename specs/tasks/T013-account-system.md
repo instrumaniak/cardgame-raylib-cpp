@@ -1,6 +1,7 @@
 # T013: Account System
 
 ## Status: pending
+## Phase: 2
 
 ## Goal
 Account save/load, hero unlock, and gold economy.

@@ -1,6 +1,7 @@
 # T026: Unit Tests
 
 ## Status: pending
+## Phase: 6
 
 ## Goal
 Comprehensive unit tests for all pure logic modules using doctest.

@@ -1,6 +1,8 @@
 # T024: Game Screen
 
 ## Status: pending
+## Phase: 5
+## Critical: true
 
 ## Goal
 GameScreen that orchestrates the full gameplay loop.

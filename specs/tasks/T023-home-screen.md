@@ -1,6 +1,7 @@
 # T023: Home Screen
 
 ## Status: pending
+## Phase: 5
 
 ## Goal
 HomeScreen that handles hero selection, account display, and game start.

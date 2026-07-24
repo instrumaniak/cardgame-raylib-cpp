@@ -1,0 +1,261 @@
+tasks:
+  T001:
+    name: Project Setup
+    status: pending
+    depends: ~
+    phase: 0
+    critical: true
+  T002:
+    name: Asset Acquisition
+    status: pending
+    depends:
+      - T001
+    phase: 0
+    critical: false
+  T003:
+    name: Core Types
+    status: pending
+    depends:
+      - T001
+    phase: 1
+    critical: true
+  T004:
+    name: Resource Manager
+    status: pending
+    depends:
+      - T001
+      - T002
+    phase: 1
+    critical: false
+  T005:
+    name: Layout System
+    status: pending
+    depends:
+      - T001
+    phase: 1
+    critical: false
+  T006:
+    name: Screen Manager
+    status: pending
+    depends:
+      - T001
+    phase: 1
+    critical: false
+  T007:
+    name: Input Handling
+    status: pending
+    depends:
+      - T005
+    phase: 1
+    critical: false
+  T008:
+    name: Main Entry
+    status: pending
+    depends:
+      - T003
+      - T004
+      - T005
+      - T006
+      - T007
+    phase: 1
+    critical: false
+  T009:
+    name: Board Generation
+    status: pending
+    depends:
+      - T003
+    phase: 2
+    critical: false
+  T010:
+    name: Item System
+    status: pending
+    depends:
+      - T003
+    phase: 2
+    critical: true
+  T011:
+    name: Combat System
+    status: pending
+    depends:
+      - T003
+      - T010
+    phase: 2
+    critical: true
+  T012:
+    name: Card Effects
+    status: pending
+    depends:
+      - T003
+      - T010
+      - T011
+    phase: 2
+    critical: true
+  T013:
+    name: Account System
+    status: pending
+    depends:
+      - T003
+    phase: 2
+    critical: false
+  T014:
+    name: Fog Visibility
+    status: pending
+    depends:
+      - T010
+    phase: 2
+    critical: false
+  T015:
+    name: Level Config
+    status: pending
+    depends:
+      - T003
+    phase: 2
+    critical: false
+  T016:
+    name: Turn Flow
+    status: pending
+    depends:
+      - T009
+      - T010
+      - T011
+      - T012
+      - T013
+      - T014
+      - T015
+    phase: 3
+    critical: true
+  T017:
+    name: Card Rendering
+    status: pending
+    depends:
+      - T003
+      - T004
+    phase: 4
+    critical: false
+  T018:
+    name: Board Rendering
+    status: pending
+    depends:
+      - T017
+      - T014
+    phase: 4
+    critical: false
+  T019:
+    name: Hero Panel
+    status: pending
+    depends:
+      - T003
+      - T004
+    phase: 4
+    critical: false
+  T020:
+    name: Hud Rendering
+    status: pending
+    depends:
+      - T003
+      - T004
+    phase: 4
+    critical: false
+  T021:
+    name: Menu Rendering
+    status: pending
+    depends:
+      - T003
+      - T004
+    phase: 4
+    critical: false
+  T022:
+    name: Win Lose Overlays
+    status: pending
+    depends:
+      - T003
+      - T004
+    phase: 4
+    critical: false
+  T023:
+    name: Home Screen
+    status: pending
+    depends:
+      - T006
+      - T013
+      - T021
+    phase: 5
+    critical: false
+  T024:
+    name: Game Screen
+    status: pending
+    depends:
+      - T006
+      - T009
+      - T016
+      - T018
+      - T019
+      - T020
+    phase: 5
+    critical: true
+  T025:
+    name: Win Lose Screens
+    status: pending
+    depends:
+      - T006
+      - T013
+      - T022
+    phase: 5
+    critical: false
+  T026:
+    name: Unit Tests
+    status: pending
+    depends:
+      - T009
+      - T010
+      - T011
+      - T012
+      - T013
+    phase: 6
+    critical: false
+  T027:
+    name: Sound Integration
+    status: pending
+    depends:
+      - T004
+      - T024
+    phase: 6
+    critical: false
+  T028:
+    name: Animation System
+    status: pending
+    depends:
+      - T003
+      - T024
+    phase: 6
+    critical: false
+  T029:
+    name: Json Data Loading
+    status: pending
+    depends:
+      - T003
+      - T002
+    phase: 6
+    critical: false
+  T030:
+    name: Final Polish
+    status: pending
+    depends: ~
+    phase: 6
+    critical: false
+phases:
+  0: Scaffolding
+  1: Foundation Types
+  2: Pure Logic
+  3: Integration
+  4: Rendering
+  5: Screens
+  6: Polish
+critical_path:
+  - T001
+  - T003
+  - T010
+  - T011
+  - T012
+  - T016
+  - T024

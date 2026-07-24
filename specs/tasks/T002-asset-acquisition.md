@@ -1,6 +1,7 @@
 # T002: Asset Acquisition
 
 ## Status: pending
+## Phase: 0
 
 ## Goal
 Obtain and place all game assets (sprites, fonts, audio) in the correct directories.

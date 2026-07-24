@@ -1,6 +1,7 @@
 # T009: Board Generation
 
 ## Status: pending
+## Phase: 2
 
 ## Goal
 Board generation from LevelConfig with weighted random card placement.

@@ -1,6 +1,7 @@
 # T018: Board Rendering
 
 ## Status: pending
+## Phase: 4
 
 ## Goal
 Draw the full board grid with correct fog behavior.

@@ -1,6 +1,7 @@
 # T028: Animation System
 
 ## Status: pending
+## Phase: 6
 
 ## Goal
 Easing functions, AnimState, and visual effect animations.

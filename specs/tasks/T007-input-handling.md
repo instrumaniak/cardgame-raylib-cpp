@@ -1,6 +1,7 @@
 # T007: Input Handling
 
 ## Status: pending
+## Phase: 1
 
 ## Goal
 Virtual mouse coordinate conversion and fullscreen toggle.

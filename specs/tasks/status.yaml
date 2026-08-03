@@ -1,13 +1,13 @@
 tasks:
   T001:
     name: Project Setup
-    status: pending
+    status: done
     depends: ~
     phase: 0
     critical: true
   T002:
     name: Asset Acquisition
-    status: pending
+    status: done
     depends:
       - T001
     phase: 0

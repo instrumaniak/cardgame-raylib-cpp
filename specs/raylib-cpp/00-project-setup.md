@@ -71,6 +71,7 @@ cardgame-raylib/
 └── src/
     ├── main.cpp
     ├── core/
+    │   ├── constants.h
     │   ├── types.h
     │   ├── components.h
     │   ├── entities.h

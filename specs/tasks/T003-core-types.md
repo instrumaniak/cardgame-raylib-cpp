@@ -19,16 +19,18 @@ Load these before starting:
 - `raylib-cpp/05-coding-style.md` → "Naming Conventions" section
 
 ## Files to Create/Modify
+- `src/core/constants.h` (already created in T001 — immutable compile-time constants, `SCREAMING_SNAKE` naming)
 - `src/core/types.h` (NEW)
 - `src/core/components.h` (NEW)
 - `src/core/entities.h` (NEW)
 
 ## Implementation Steps
-1. Create `types.h` with all enum classes (ScreenID, GameStatus, CardType, Biome, EffectType, Sfx) and data structs (Card, Hero, LevelConfig, CardEffect, Button, HeroSave, Account, GameState)
-2. Create `components.h` with HealthData, ShieldData, GoldData, InventoryData, PositionData, AnimState
-3. Create `entities.h` with PlayerState, CardSlot, VisualEffect
-4. Ensure all code is inside `game::` namespace
-5. Verify compilation with stub includes
+1. Verify `constants.h` exists with DESIGN_WIDTH, DESIGN_HEIGHT, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, TARGET_FPS, CARD_WIDTH, CARD_HEIGHT, ROW_HEIGHT, SLOTS_PER_ROW
+2. Create `types.h` with all enum classes (ScreenID, GameStatus, CardType, Biome, EffectType, Sfx) and data structs (Card, Hero, LevelConfig, CardEffect, Button, HeroSave, Account, GameState)
+3. Create `components.h` with HealthData, ShieldData, GoldData, InventoryData, PositionData, AnimState
+4. Create `entities.h` with PlayerState, CardSlot, VisualEffect
+5. Ensure all code is inside `game::` namespace
+6. Verify compilation with stub includes
 
 ## Constraints
 - Header-only files, no .cpp needed
@@ -36,6 +38,8 @@ Load these before starting:
 - `game::` namespace for all game types
 - camelCase for functions, PascalCase for types
 - `_camelCase` for private members
+- Immutable constants use `SCREAMING_SNAKE` (see constants.h)
+- Configurable values use `camelCase`
 
 ## Acceptance Criteria
 - [ ] All headers compile without errors
@@ -44,4 +48,5 @@ Load these before starting:
 - [ ] No naming convention violations
 
 ## Notes
-( filled in during/after implementation )
+- `constants.h` was created during T001 to centralize game-wide constants (960×540 design resolution, etc.)
+- See `raylib-cpp/01-architecture.md` → "Core Constants" section for the full list

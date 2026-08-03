@@ -1,6 +1,6 @@
 # T001: Project Setup
 
-## Status: pending
+## Status: done
 ## Phase: 0
 ## Critical: true
 
@@ -34,10 +34,17 @@ Load these before starting:
 - Follow naming conventions in `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] `make` compiles without errors
-- [ ] `make run` opens a window
-- [ ] `make clean` removes build artifacts
-- [ ] Directory tree exists: `src/core/`, `src/logic/`, `src/render/`, `src/screens/`, `src/data/`, `src/anim/`, `src/input/`, `assets/audio/`, `assets/fonts/`, `assets/img/`, `assets/data/`
+- [x] `make` compiles without errors
+- [x] `make run` opens a window
+- [x] `make clean` removes build artifacts
+- [x] Directory tree exists: `src/core/`, `src/logic/`, `src/render/`, `src/screens/`, `src/data/`, `src/anim/`, `src/input/`, `assets/audio/`, `assets/fonts/`, `assets/img/`, `assets/data/`
+- [x] Makefile outputs to `build/` directory
+- [x] `.gitignore` excludes `build/`, `assets/`, `vendor/`, `save.json`
+- [x] `src/core/constants.h` created with DESIGN_WIDTH/HEIGHT, INITIAL_WINDOW_WIDTH/HEIGHT, TARGET_FPS, CARD_WIDTH/HEIGHT, ROW_HEIGHT, SLOTS_PER_ROW
 
 ## Notes
-( filled in during/after implementation )
+- `src/game.cpp` was renamed to `src/main.cpp` (per spec)
+- Vendor raylib headers are in `vendor/raylib/` (not `vendor/raylib/src/`), so Makefile uses `-I vendor/raylib -L vendor/raylib`
+- System link flags: `-lm -lpthread -ldl -lrt -lX11`
+- `make debug` sets `-g -O0 -DDEBUG` for release vs debug builds
+- `src/core/constants.h` was added to centralize immutable compile-time constants using `SCREAMING_SNAKE` naming

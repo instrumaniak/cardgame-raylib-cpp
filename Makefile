@@ -1,22 +1,28 @@
-RAYLIB_PATH ?= ./vendor/raylib
+CXX       := g++
+CXXFLAGS  := -std=c++17 -Wall -Wextra -O2 -I vendor/raylib -I src
+LDFLAGS   := -L vendor/raylib -lraylib -lm -lpthread -ldl -lrt -lX11
+SRC       := src/main.cpp
+OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
+TARGET    := build/cardgame
 
-RAYLIB_INCLUDE_PATH = ${RAYLIB_PATH}
-RAYLIB_LIB_PATH = ${RAYLIB_PATH}
-
-CC = g++
-CFLAGS = -Isrc -I${RAYLIB_INCLUDE_PATH} -Wall -std=c++17
-LDFLAGS = -L${RAYLIB_LIB_PATH}
-LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
-
-build/game: src/game.cpp | build
-	${CC} ${CFLAGS} -o $@ $< $(LDFLAGS) $(LIBS)
+all: $(TARGET)
 
 build:
 	mkdir -p build
 
-run: build/game
-	./build/game
+$(TARGET): $(OBJ) | build
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+build/%.o: src/%.cpp | build
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+run: $(TARGET)
+	./$(TARGET)
+
+debug: CXXFLAGS += -g -O0 -DDEBUG
+debug: $(TARGET)
 
 clean:
 	rm -rf build
 
+.PHONY: all run debug clean

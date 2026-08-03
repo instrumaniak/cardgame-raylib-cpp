@@ -40,7 +40,8 @@ When in doubt, choose the option that a JS/TS developer would immediately recogn
 | Methods | `camelCase` | `camelCase` | `switchTo()` |
 | Variables | `camelCase` | `camelCase` | `currentRow` |
 | Parameters | `camelCase` | `camelCase` | `availableBiomes` |
-| Constants | `camelCase` or `SCREAMING_SNAKE` | `camelCase` or `SCREAMING_SNAKE` | `maxHp` or `MAX_HP` |
+| Immutable constants | `SCREAMING_SNAKE` | `SCREAMING_SNAKE` | `DESIGN_WIDTH`, `MAX_HAND_SIZE` |
+| Configurable constants | `camelCase` | `camelCase` | `maxHp`, `defaultSpeed` |
 | Private members | `_camelCase` | `_camelCase` | `_screens` |
 | Boolean vars | `is`/`has`/`can` prefix | `is`/`has`/`can` prefix | `isActive`, `hasEndCard` |
 | Enum type | `PascalCase` | `PascalCase` | `GameStatus` |
@@ -55,6 +56,7 @@ When in doubt, choose the option that a JS/TS developer would immediately recogn
 - **Boolean getters:** Use `is`/`has`/`can`/`should` prefix. A function like `active()` becomes `isActive()`.
 - **File names:** `snake_case.cpp` / `snake_case.h` (avoids case-sensitivity issues across OS).
 - **Abbreviations:** Avoid. Write `screenWidth` not `screenW`. Write `ResourceManager` not `ResMgr`.
+- **Constants:** Immutable compile-time constants (design resolution, max values, fixed dimensions) use `SCREAMING_SNAKE`. Configurable or context-dependent values use `camelCase`.
 
 ### Good Examples
 

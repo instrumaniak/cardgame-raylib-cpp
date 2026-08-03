@@ -14,8 +14,8 @@
 
 | Task | Name | Depends On | Status |
 |------|------|------------|--------|
-| [T001](T001-project-setup.md) | Project structure & Makefile | — | pending |
-| [T002](T002-asset-acquisition.md) | Asset acquisition & placement | T001 | pending |
+| [T001](T001-project-setup.md) | Project structure & Makefile | — | done |
+| [T002](T002-asset-acquisition.md) | Asset acquisition & placement | T001 | done |
 
 ## Phase 1: Foundation Types
 

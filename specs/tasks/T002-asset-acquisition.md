@@ -1,6 +1,6 @@
 # T002: Asset Acquisition
 
-## Status: pending
+## Status: done
 ## Phase: 0
 
 ## Goal
@@ -44,11 +44,15 @@ Load these before starting:
 - Follow naming conventions in `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] All referenced asset files exist in correct paths
-- [ ] Image files are valid PNG format
-- [ ] Font files are valid TTF format
-- [ ] Audio files are valid WAV format
-- [ ] No missing assets referenced in code
+- [x] All referenced asset files exist in correct paths
+- [x] Image files are valid PNG format (20 PNGs in assets/img/)
+- [x] Font files are valid TTF format (PearSoda.ttf, Zepto-Regular.ttf in assets/fonts/)
+- [x] Audio files are valid format (8 MP3s in assets/audio/ — user confirmed MP3 over WAV)
+- [x] No missing assets referenced in code
+- [x] All 5 JSON data files present (assets/data/)
 
 ## Notes
-( filled in during/after implementation )
+- All assets were already present in the repo from a prior stage — no downloads needed
+- Audio format: MP3 (not WAV) — user elected to keep existing MP3 files
+- Font filenames in repo use capitalized names: `PearSoda.ttf`, `Zepto-Regular.ttf` (not lowercase as in spec)
+- Additional frame PNGs exist beyond spec minimum: `biome-frame.png`, `card-bg-deco*.png`, `card-frame-brown.png`, `card-frame-orange.png`, `pointer.png`, `shards.png`, `click.png`, `hit.png`

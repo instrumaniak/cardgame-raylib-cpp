@@ -1,6 +1,6 @@
 # T003: Core Types
 
-## Status: pending
+## Status: done
 ## Phase: 1
 ## Critical: true
 
@@ -50,3 +50,8 @@ Load these before starting:
 ## Notes
 - `constants.h` was created during T001 to centralize game-wide constants (960×540 design resolution, etc.)
 - See `raylib-cpp/01-architecture.md` → "Core Constants" section for the full list
+- `GameState` placed in `entities.h` (not `types.h`) — it composes entity structs (PlayerState, CardSlot, VisualEffect)
+- `types.h` includes `raylib.h` because `Button` uses `Rectangle` — acceptable since core/ is the shared layer
+- `AnimState` methods (`start`, `update`, `value`) declared in `components.h` but need implementation in a .cpp (or inline) later
+- `Account` struct is data-only here; `unlockHero`/`spendGold`/`addGold`/`load`/`save` methods deferred to `logic/account.h` per architecture spec
+- `HeroSave` and `Account` separated from the main enums block — they're persistence types, not runtime game types

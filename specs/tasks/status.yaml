@@ -14,7 +14,7 @@ tasks:
     critical: false
   T003:
     name: Core Types
-    status: pending
+    status: done
     depends:
       - T001
     phase: 1

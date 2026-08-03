@@ -650,6 +650,64 @@ struct LoadResult {
 LoadResult loadData(const std::string& path);
 ```
 
+### Generic `Result<T>` Template
+
+For reusable error handling, use a generic template. Add to `core/result.h`:
+
+```cpp
+// core/result.h — Lightweight error handling (no exceptions)
+#pragma once
+
+#include <string>
+
+template <typename T>
+struct Result {
+  bool ok;
+  T value;
+  std::string error;
+
+  // Convenience constructors
+  static Result success(T val) { return {true, std::move(val), ""}; }
+  static Result failure(std::string msg) { return {false, T{}, std::move(msg)}; }
+};
+
+// Specialization for void-returning functions
+struct ResultVoid {
+  bool ok;
+  std::string error;
+
+  static ResultVoid success() { return {true, ""}; }
+  static ResultVoid failure(std::string msg) { return {false, std::move(msg)}; }
+};
+```
+
+**Usage pattern:**
+```cpp
+#include "core/result.h"
+
+Result<int> parseInt(const std::string& str);
+ResultVoid saveToFile(const std::string& path, const Data& data);
+
+// Caller checks .ok before accessing .value
+auto result = parseInt("42");
+if (result.ok) {
+  use(result.value);
+} else {
+  TraceLog(LOG_ERROR, "Parse failed: %s", result.error.c_str());
+}
+```
+
+**When to use:**
+- File I/O (may fail)
+- Parsing (may fail)
+- Network operations (may fail)
+- Any operation with expected failure modes
+
+**When NOT to use:**
+- Pure computations that cannot fail
+- Functions that always succeed (most internal logic)
+- Use `std::optional` for nullable returns, not `Result`
+
 ### std::optional (like JS `?.` optional chaining)
 
 ```cpp
@@ -720,13 +778,13 @@ Card findCard(...) {
 | C++ Feature | JS/TS Equivalent | Usage |
 |---|---|---|
 | `const` / `constexpr` | `const` | Immutable values |
-| `auto` | `const` / inferred types | Type inference |
+| `auto` | `const` / inferred types | Type inference (**strongly discouraged**, see §10) |
 | `std::optional` | `?.` / `??` | Nullable values |
-| Structured bindings | Destructuring | `auto [key, value] = ...` |
+| Structured bindings | Destructuring | `auto [key, value] = ...` (**discouraged**, prefer explicit) |
 | `enum class` | `enum` | Type-safe enums |
 | `using` alias | `type` / `interface` | Type aliases |
 | Lambdas | Arrow functions | `[]() { ... }` |
-| Range-based for | `for...of` | `for (auto& x : vec)` |
+| Range-based for | `for...of` | `for (const auto& x : vec)` (acceptable) |
 | `std::string_view` | n/a (JS strings are immutable) | Read-only string refs |
 | `[[nodiscard]]` | n/a (implicit in JS) | Warn on unused return |
 
@@ -743,15 +801,34 @@ const std::string name = "hero";
 constexpr int doubleValue(int x) { return x * 2; }
 ```
 
-### `auto` (JS Type Inference)
+### `auto` — Strongly Discouraged (with exceptions)
+
+The `auto` keyword should be **strongly discouraged** in production code and tests. Explicit types improve readability, enable IDE tooling, and help both humans and agents infer types at a glance.
+
+**Exceptions where `auto` is acceptable or preferred:**
+
+| Case | Rule | Rationale |
+|---|---|---|
+| Lambda variables | `auto` required | Lambda types are unnameable; `std::function` adds heap alloc + type erasure |
+| Range-for variables | `const auto&` recommended | Writing explicit type like `const std::pair<const std::string, Task>&` is verbose with no safety benefit |
+| Iterator from `.find()` | `auto` preferred | Type is fully determined by container; spelling it out adds verbosity |
 
 ```cpp
-// JS: const items = getItems();
-auto items = getItems();  // type inferred
+// ✅ Required — lambda types are unnameable
+auto formatCard = [](const Card& c) { return c.name; };
 
-// JS: for (const item of items) { ... }
-for (const auto& item : items) { ... }
+// ✅ Recommended — guaranteed correct, no copies
+for (const auto& kv : textureMap) { ... }
+
+// ✅ Preferred — type determined by container
+auto it = cards.find(targetId);
+
+// ❌ Avoid — explicit type is clearer
+auto result = computeDamage(base, modifier);  // what type is result?
+int result = computeDamage(base, modifier);   // explicit = clear
 ```
+
+**Note:** This rule is stricter than typical C++ game projects (which often use `auto` liberally). The deliberate choice here is to maximize readability for a mixed human+agent codebase.
 
 ### Structured Bindings (JS Destructuring)
 
@@ -792,12 +869,15 @@ for (size_t i = 0; i < hand.size(); ++i) {
 ### Good Example
 
 ```cpp
-// Modern C++ that looks like JS/TS
-auto [x, y] = layout.virtualToScreen({cardX, cardY});
+// Modern C++ with explicit types (preferred)
+std::pair<int, int> position = layout.virtualToScreen({cardX, cardY});
+int x = position.first;
+int y = position.second;
 
 constexpr int maxHp = 100;
 const std::string defaultHero = "headless-knight";
 
+// Range-for with const auto& (acceptable exception)
 for (const auto& [key, texture] : _textures) {
   if (key == targetKey) {
     return texture;
@@ -810,7 +890,7 @@ for (const auto& [key, texture] : _textures) {
 ```cpp
 // Old-style C++ that doesn't look like JS/TS
 typedef std::map<std::string, Texture2D> TextureMap;  // use 'using'
-TextureMap::iterator it = _textures.find(key);        // use 'auto'
+TextureMap::iterator it = _textures.find(key);        // use 'auto' (iterator exception)
 if (it != _textures.end()) {                          // use range-for or structured binding
   return it->second;
 }
@@ -822,26 +902,69 @@ if (it != _textures.end()) {                          // use range-for or struct
 
 ### Rules
 
-- Use `//` for single-line comments (not `/* */`).
-- Comment **why**, not **what**. The code should be self-documenting for the "what."
-- File-level comments: optional, brief purpose statement.
-- Function-level comments: only when the algorithm is non-obvious.
-- No commented-out code in commits (use git history instead).
+- Use `//` for single-line comments (not `/* */`)
+- Comment **why**, not **what** (code should be self-documenting for "what")
+- No commented-out code (use git history)
 - TODO format: `// TODO(username): description`
 
-### JS/TS Comparison
+### File-Level Comments
 
-Same as JS/TS: prefer `//` comments, avoid `/* */` blocks. No JSDoc (C++ uses Doxygen, but this project does not require it).
+Every `.h` file should have a brief purpose comment at the top:
+
+```cpp
+// combat.h — Damage calculation and shield absorption logic
+// Pure game logic layer: no raylib includes, no I/O
+#pragma once
+```
+
+### Function-Level Comments
+
+Add comments when:
+- Algorithm is non-obvious (e.g., weighted random pick)
+- Side effects exist (e.g., modifies global state)
+- Performance critical path (e.g., hot loop)
+
+```cpp
+// Weighted random selection using cumulative distribution
+// Returns index into `weights` array, or -1 if all weights are 0
+int weightedPick(const std::vector<int>& weights, std::mt19937& rng);
+```
+
+### Parameter Documentation
+
+For complex functions, document parameters inline or with `///` comments:
+
+```cpp
+/// @param baseDamage - Raw damage before modifiers
+/// @param player - Current player state (modified in-place)
+/// @param items - Inventory cards that may modify damage
+CombatResult applyDamage(int baseDamage, PlayerState& player,
+                         const std::vector<Card>& items);
+```
+
+### Agent-Readable Code
+
+This codebase is read by both humans and AI agents. To support both:
+- Explicit types (not `auto`) help agents infer types and relationships
+- Consistent naming (camelCase functions, PascalCase types) enables pattern matching
+- Comments explain intent, not syntax — agents can read code, but need context for "why"
+
+### Balance
+
+Documentation should be practical, not verbose:
+- Game code evolves rapidly — avoid docs that become stale
+- Focus on **intent** and **constraints**, not obvious behavior
+- One comment per non-obvious decision, not one per line
 
 ### Good Example
 
 ```cpp
-// Shuffle board rows so the player doesn't know exact order
+// Shuffle board rows so player doesn't know exact order
 // (original game randomizes row positions after generation)
 std::shuffle(rows.begin(), rows.end(), rng);
 
 // TODO(raziur): Add animation delay between card flips
-// (currently instant - feels jarring)
+// (currently instant — feels jarring)
 
 int screenWidth = 800;  // design resolution width (virtual pixels)
 ```
@@ -856,8 +979,55 @@ counter++;
    rather than why it exists. */
 int x = computePosition();
 
-// int oldCode = deprecated();   // commented-out code - use git
+// int oldCode = deprecated();   // commented-out code — use git
 ```
+
+---
+
+## 11B. Performance Guidelines
+
+### Philosophy
+
+This project follows lightweight Data-Oriented Design (DOD) principles. We don't need full ECS or Structure-of-Arrays — just cache-friendly, predictable code.
+
+### Core Principles
+
+| Principle | Rule | Why |
+|---|---|---|
+| Stack-first | Prefer stack allocation over heap | Cache locality, automatic cleanup, no allocator overhead |
+| Contiguous storage | `std::vector<T>` over `std::vector<T*>` | Elements side-by-side in memory → fewer cache misses |
+| Value semantics | Store by value, not pointer | Avoids indirection, enables compiler optimizations |
+| Const references | `const T&` for read-only params | Avoid copies without ownership transfer |
+| Compile-time computation | `constexpr` for constants and simple functions | Zero runtime cost |
+
+### Anti-patterns
+
+```cpp
+// ❌ Pointer indirection — scattered memory, cache misses
+std::vector<Card*> cards;
+cards.push_back(new Card());
+
+// ✅ Contiguous values — cache-friendly iteration
+std::vector<Card> cards;
+cards.push_back(Card());
+
+// ❌ Virtual dispatch on hot path (per-frame)
+class Card { virtual void render(); };
+
+// ✅ Data struct + free function (no vtable)
+struct Card { CardType type; int value; };
+void renderCard(const Card& card, float x, float y);
+```
+
+### When to Break Rules
+
+- `std::unique_ptr` for polymorphic screens (only 4 screens, cold path)
+- Raw pointers for non-owning observers (existing pattern in `ScreenManager`)
+- Virtual dispatch acceptable for screen transitions (rare, not per-frame)
+
+### Reference
+
+This aligns with Mike Acton's Data-Oriented Design principles and the BitSquid/Stingray engine architecture. For small/medium games, just avoiding pointer indirection in hot loops is sufficient — full ECS is overkill.
 
 ---
 
@@ -1040,7 +1210,7 @@ namespace game { namespace logic {
 | Anti-pattern | Why | Correct Approach |
 |---|---|---|
 | `new`/`delete` | Manual memory management | `std::make_unique` / RAII |
-| `throw`/`catch` | Exceptions forbidden | `std::optional`, result structs |
+| `throw`/`catch` | Exceptions forbidden | `Result<T>`, `std::optional` |
 | `dynamic_cast` | RTTI forbidden | `enum class` + `switch` |
 | `printf`/`cout` | Use raylib `TraceLog` for logging | `TraceLog(LOG_INFO, ...)` |
 | `using namespace std;` | Pollutes global namespace | `std::` prefix everywhere |
@@ -1052,6 +1222,8 @@ namespace game { namespace logic {
 | Global namespace types/functions | Name collisions, poor organization | `namespace game { }` |
 | Struct + free functions (C pattern) | Not idiomatic C++ | Methods on the struct |
 | `using namespace` in headers | Pollutes includer's namespace | Only in .cpp files |
+| `auto x = ...` (general case) | Reduces readability for humans/agents | Explicit type annotation (see §10) |
+| Per-function error structs | Code duplication, inconsistent APIs | `Result<T>` template (see §9) |
 
 ### Specific C++ Anti-patterns That Look Like JS Mistakes
 

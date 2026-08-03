@@ -29,8 +29,10 @@ Load game data (heroes, cards, items, levels) from JSON files.
 
 ## Constraints
 - `game::data::` namespace
+- `#pragma once` header guard
 - nlohmann/json
 - graceful fallback
+- Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
 - [ ] All data loads from JSON

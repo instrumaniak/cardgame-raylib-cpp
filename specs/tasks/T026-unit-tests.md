@@ -37,6 +37,7 @@ Comprehensive unit tests for all pure logic modules using doctest.
 - Tests compile WITHOUT raylib
 - Deterministic seeding (rng(42))
 - CHECK not REQUIRE
+- Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
 - [ ] All tests pass

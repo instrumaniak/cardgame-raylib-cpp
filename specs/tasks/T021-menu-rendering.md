@@ -18,7 +18,7 @@ HOME screen UI (title, hero grid, start button, gold display).
 - `src/render/menu_draw.cpp` (NEW)
 
 ## Implementation Steps
-1. Create `menu_draw.h` with `drawTitle`, `drawHeroGrid`, `drawStartButton`, `drawGoldDisplay` in `game::render::`
+1. Create `menu_draw.h` with `drawTitle()`, `drawHeroGrid()`, `drawStartButton()`, `drawGoldDisplay()` in `game::render::`
 2. `drawTitle()`: "Drop the Volunteer" centered, big (PearSoda ~48px)
 3. `drawHeroGrid()`: 2 rows x 4 cols, hero art + name + stats, locked heroes show lock icon + cost, selected hero highlight border
 4. `drawStartButton()`: centered below grid

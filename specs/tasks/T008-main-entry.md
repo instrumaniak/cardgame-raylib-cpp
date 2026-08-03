@@ -7,8 +7,8 @@
 `main.cpp` that wires together all core systems.
 
 ## Depends On
-- T003 (Resource Manager)
-- T004 (Asset Loading)
+- T003 (Core Types)
+- T004 (Resource Manager)
 - T005 (Layout System)
 - T006 (Screen Manager)
 - T007 (Input Handling)

@@ -4,7 +4,8 @@ LDFLAGS   := -L vendor/raylib -lraylib -lm -lpthread -ldl -lrt -lX11
 SRC       := src/main.cpp \
             src/core/resource.cpp \
             src/core/layout.cpp \
-            src/core/screen.cpp
+            src/core/screen.cpp \
+            src/input/input.cpp
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame
 

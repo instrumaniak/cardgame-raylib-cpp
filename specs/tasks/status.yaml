@@ -43,7 +43,7 @@ tasks:
     critical: false
   T007:
     name: Input Handling
-    status: pending
+    status: done
     depends:
       - T005
     phase: 1

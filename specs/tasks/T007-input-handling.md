@@ -1,6 +1,6 @@
 # T007: Input Handling
 
-## Status: pending
+## Status: done
 ## Phase: 1
 
 ## Goal
@@ -31,9 +31,11 @@ Load these before starting:
 - Depends on `Layout` for coord conversion
 
 ## Acceptance Criteria
-- [ ] Mouse coords correctly mapped to design resolution
-- [ ] F11 toggles fullscreen
-- [ ] `make` succeeds
+- [x] Mouse coords correctly mapped to design resolution
+- [x] F11 toggles fullscreen
+- [x] `make` succeeds
 
 ## Notes
-( filled in during/after implementation )
+- Added `game::virtualMousePosition(const Layout&)` and `game::handleGlobalInput()`.
+- Input module is wired into the build and compiles cleanly.
+- Verified with `make` and `make format-check`.

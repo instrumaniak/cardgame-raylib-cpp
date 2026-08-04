@@ -4,7 +4,7 @@
 Define testing strategy, build targets, sound integration, animation system, and polish requirements.
 
 ## Requirements
-1. Unit tests for all pure game logic (boardGen, cardEffects, combat, items, account)
+1. Unit tests for all pure game logic (board generation, card effects, combat, items, account, fog, level config, turn flow, easing, JSON data)
 2. doctest as the test framework (system package)
 3. Makefile `test` target compiles and runs tests
 4. Sound effects: 8 SFX triggered at correct game events
@@ -13,9 +13,10 @@ Define testing strategy, build targets, sound integration, animation system, and
 
 ## Constraints
 - Logic tests compile WITHOUT raylib headers (link -lraylib only for main binary)
-- Test files in src/ alongside implementation (named test_*.cpp)
+- Test files live with their tasks — each logic task creates its own `test_*.cpp` (T009→test_board_gen, T010→test_items, T011→test_combat, T012→test_card_effects, T013→test_account, T014→test_fog, T015→test_level_config, T016→test_turn_flow, T028→test_easing, T029→test_game_data)
 - Each test_*.cpp uses `#include "doctest/doctest.h"` but only one test main
 - No raylib dependency in tests — test pure functions only
+- T026 is verification + integration only (no individual unit test creation)
 - Sound: LoadSound from .wav files in assets/audio/
 - Animations: CPU-side tweening with easing functions, no GPU shaders
 - All public APIs must be inside appropriate namespaces
@@ -24,18 +25,15 @@ Define testing strategy, build targets, sound integration, animation system, and
 
 ```makefile
 # Test configuration
-TEST_CXXFLAGS := -std=c++17 -Wall -Wextra -g -O0 \
-                 -I src -I vendor/raylib/src \
-                 -DDOCTEST_CONFIG_IMPLEMENT
-TEST_SRC      := test_main.cpp \
-                 test_board_gen.cpp test_card_effects.cpp \
-                 test_combat.cpp test_items.cpp test_account.cpp
-TEST_TARGET   := run_tests
+TEST_CXXFLAGS := -std=c++17 -Wall -Wextra -g -O0 -I src
+TEST_SRC      := src/test_main.cpp
+TEST_LOGIC_SRC :=   # populated by per-task test files
+TEST_TARGET   := build/run_tests
 
 test: $(TEST_TARGET)
 	./$(TEST_TARGET)
 
-$(TEST_TARGET): $(TEST_SRC)
+$(TEST_TARGET): $(TEST_SRC) $(TEST_LOGIC_SRC)
 	$(CXX) $(TEST_CXXFLAGS) -o $@ $^ -lm
 
 # Release build
@@ -60,9 +58,13 @@ int main(int argc, char** argv) {
 }
 ```
 
+Note: `DOCTEST_CONFIG_IMPLEMENT` is defined in the source file, not via compiler flags, to avoid ODR violations when multiple test files include doctest.
+
 ### Test Files
 
-**test_board_gen.cpp:**
+Each logic task creates its own test file alongside the implementation:
+
+**test_board_gen.cpp (T009):**
 ```cpp
 #include "doctest/doctest.h"
 #include "logic/board_gen.h"
@@ -102,7 +104,7 @@ TEST_CASE("weighted card rates per level") {
 }
 ```
 
-**test_card_effects.cpp:**
+**test_card_effects.cpp (T012):**
 ```cpp
 #include "doctest/doctest.h"
 #include "logic/card_effects.h"
@@ -127,7 +129,7 @@ TEST_CASE("place card returns chest type")
 TEST_CASE("end card returns zero effect")
 ```
 
-**test_combat.cpp:**
+**test_combat.cpp (T011):**
 ```cpp
 #include "doctest/doctest.h"
 #include "logic/combat.h"
@@ -150,7 +152,7 @@ TEST_CASE("cursed shield sets max HP to 1")
 TEST_CASE("emerald adds gold on monster hit")
 ```
 
-**test_items.cpp:**
+**test_items.cpp (T010):**
 ```cpp
 #include "doctest/doctest.h"
 #include "logic/items.h"
@@ -176,7 +178,7 @@ TEST_CASE("athelas prevents death once")
 TEST_CASE("amethyst doubles gold and removes self")
 ```
 
-**test_account.cpp:**
+**test_account.cpp (T013):**
 ```cpp
 #include "doctest/doctest.h"
 #include "logic/account.h"
@@ -196,6 +198,121 @@ TEST_CASE("save/load round-trip preserves data") {
     // write to stringstream, read back
 }
 ```
+
+**test_fog.cpp (T014):**
+```cpp
+#include "doctest/doctest.h"
+#include "logic/board_gen.h"
+
+using namespace game;
+using namespace game::logic;
+
+TEST_CASE("0 monster-eyes: all 3 rows visible") {
+    CHECK(getNbRowsHidden(0) == 0);
+}
+
+TEST_CASE("1 monster-eye: 1 row fogged") {
+    CHECK(getNbRowsHidden(1) == 1);
+}
+
+TEST_CASE("2+ monster-eyes: 2 rows fogged") {
+    CHECK(getNbRowsHidden(2) == 2);
+    CHECK(getNbRowsHidden(3) == 2); // capped at 2
+}
+```
+
+**test_level_config.cpp (T015):**
+```cpp
+#include "doctest/doctest.h"
+#include "logic/level_config.h"
+
+using namespace game;
+using namespace game::logic;
+
+TEST_CASE("level 1 config matches spec") {
+    auto config = getLevelConfig(1);
+    CHECK(config.rows == 5);
+    // verify rates, monster values...
+}
+
+TEST_CASE("all 6 levels have valid configs") {
+    for (int level = 1; level <= 6; level++) {
+        auto config = getLevelConfig(level);
+        CHECK(config.rows > 0);
+    }
+}
+
+TEST_CASE("chest configs match spec")
+TEST_CASE("biome exclusion works correctly")
+```
+
+**test_turn_flow.cpp (T016):**
+```cpp
+#include "doctest/doctest.h"
+#include "logic/turn_flow.h"
+#include "core/types.h"
+
+using namespace game;
+using namespace game::logic;
+
+TEST_CASE("status transitions: NotStarted → NotReady → Ready") {
+    GameState state;
+    // verify initial state machine progression
+}
+
+TEST_CASE("hero death transitions to Lose") {
+    GameState state;
+    state.player.health.current = 0;
+    die(state);
+    CHECK(state.status == GameStatus::Lose);
+}
+
+TEST_CASE("end card transitions to Win")
+TEST_CASE("monster passive attack from row below")
+TEST_CASE("chest sub-location entry/exit")
+TEST_CASE("biome card transitions to new level")
+```
+
+**test_easing.cpp (T028):**
+```cpp
+#include "doctest/doctest.h"
+#include "anim/easing.h"
+
+using namespace game::anim;
+
+TEST_CASE("lerp endpoints") {
+    CHECK(lerp(0.f, 10.f, 0.f) == doctest::Approx(0.f));
+    CHECK(lerp(0.f, 10.f, 1.f) == doctest::Approx(10.f));
+    CHECK(lerp(0.f, 10.f, 0.5f) == doctest::Approx(5.f));
+}
+
+TEST_CASE("easeInOut boundary") {
+    CHECK(easeInOut(0.f) == doctest::Approx(0.f));
+    CHECK(easeInOut(1.f) == doctest::Approx(1.f));
+}
+
+TEST_CASE("easeOut boundary")
+TEST_CASE("bounce returns 0 at t=0 and 1 at t=1")
+```
+
+**test_game_data.cpp (T029):**
+```cpp
+#include "doctest/doctest.h"
+#include "data/game_data.h"
+
+using namespace game::data;
+
+TEST_CASE("loadHeroes from JSON") {
+    auto heroes = loadHeroes("assets/data/heroes.json");
+    CHECK(heroes.size() == 4);
+}
+
+TEST_CASE("fallback when JSON missing") {
+    auto heroes = loadHeroes("nonexistent.json");
+    CHECK(heroes.size() == 4); // hardcoded defaults
+}
+
+TEST_CASE("data matches spec tables")
 
 ## Sound Effects
 
@@ -286,6 +403,12 @@ VisualEffect is defined in `core/entities.h` (see 01-architecture.md). It stores
 - [ ] All combat tests pass (shield absorption, items, invisibility, rings)
 - [ ] All item tests pass (22 items, monster-egg combo)
 - [ ] All account tests pass (unlock, spend, save/load)
+- [ ] All fog tests pass (0/1/2+ monster-eyes visibility)
+- [ ] All level config tests pass (6 levels, chest configs, biome exclusion)
+- [ ] All turn flow tests pass (status transitions, death, win, chest, biome)
+- [ ] All easing tests pass (lerp, easeInOut, easeOut, bounce)
+- [ ] All JSON data tests pass (parsing, fallback, spec match)
+- [ ] Integration tests pass (combat + items interaction)
 - [ ] Test compilation does not require -lraylib
 
 ### Sound

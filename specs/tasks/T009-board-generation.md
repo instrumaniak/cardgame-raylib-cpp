@@ -18,6 +18,7 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/board_gen.h` (NEW)
 - `src/logic/board_gen.cpp` (NEW)
+- `src/logic/test_board_gen.cpp` (NEW)
 
 ## Implementation Steps
 1. Create `board_gen.h` with `GeneratedBoard` struct and `generateBoard()` function in `game::logic::`
@@ -25,6 +26,7 @@ Load these before starting:
 3. Implement `generateBoard()` algorithm: create rows x 3 slots, place chests in rows 0..totalRows-4, place items in rows 0..totalRows-3, fill first row (no monsters), fill last row (biome or end card), fill second-to-last row (boss in center), fill remaining rows with weighted random
 4. Card rates per level from `game/01` table
 5. Cards-per-row distribution per level
+6. Write unit tests in `test_board_gen.cpp`: dimensions, first row no monsters, boss placement, chest rows, weighted rates
 
 ## Constraints
 - Must use `game::logic::` namespace

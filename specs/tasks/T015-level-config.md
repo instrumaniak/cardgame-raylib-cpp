@@ -17,6 +17,7 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/level_config.h` (NEW)
 - `src/logic/level_config.cpp` (NEW)
+- `src/logic/test_level_config.cpp` (NEW)
 
 ## Implementation Steps
 1. Implement `getLevelConfig(level)` returning `LevelConfig` for levels 1-6
@@ -24,6 +25,7 @@ Load these before starting:
 3. Implement `getAvailableBiomes(level, visitedBiomes)` with exclusion logic
 4. All 6 level configs from `game/09` table (rows, rates, monster values)
 5. Chest configs: regular chest and golden chest per level
+6. Write unit tests in `test_level_config.cpp`: configs for all 6 levels, chest configs, biome exclusion
 
 ## Constraints
 - Must use `game::logic::` namespace

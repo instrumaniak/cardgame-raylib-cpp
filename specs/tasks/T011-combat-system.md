@@ -19,6 +19,7 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/combat.h` (NEW)
 - `src/logic/combat.cpp` (NEW)
+- `src/logic/test_combat.cpp` (NEW)
 
 ## Implementation Steps
 1. Create `combat.h` with `CombatResult` struct and combat functions in `game::logic::`
@@ -27,6 +28,7 @@ Load these before starting:
 4. Implement `checkInvisibilityCloak()` (dodge on even HP)
 5. Implement `calcMaxHp()` with item modifiers
 6. Handle dragon-wing (shield after fight if was 0), emerald (+4 gold per monster hit), ring-of-courage (+5 shield at 1 HP)
+7. Write unit tests in `test_combat.cpp`: shield absorption, overflow, invisibility cloak, ring of courage, cursed shield, emerald
 
 ## Constraints
 - Must use `game::logic::` namespace

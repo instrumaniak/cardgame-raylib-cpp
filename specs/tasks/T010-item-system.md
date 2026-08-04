@@ -18,12 +18,14 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/items.h` (NEW)
 - `src/logic/items.cpp` (NEW)
+- `src/logic/test_items.cpp` (NEW)
 
 ## Implementation Steps
 1. Create `items.h` with `ComboResult` struct and all item functions in `game::logic::`
 2. Implement modifier functions: `getMonsterCardModifier`, `getHealCardModifier`, `getShieldCardModifier`, `getHeroLifeMaxModifier`, `getNbRowsHidden`
 3. Implement item effects: `checkMonsterEggCombo` (3 eggs -> 1 omelette), `applyAppleEffect` (+10 HP), `applyRingOfProtection` (+5 shield), `applyDragonWing` (+1 shield after fight), `applyAthelas` (prevent death once), `applyCursedShield` (max HP=1), `applyAmethyst` (double gold, remove self)
 4. All 22 items from `game/03` table
+5. Write unit tests in `test_items.cpp`: monster egg combo, apple, ring of protection, dragon wing, athelas, amethyst, all 22 item effects
 
 ## Constraints
 - Must use `game::logic::` namespace

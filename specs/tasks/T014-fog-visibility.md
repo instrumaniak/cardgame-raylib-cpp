@@ -16,6 +16,7 @@ Load these before starting:
 
 ## Files to Create/Modify
 - Add functions to `src/logic/board_gen.h` (or create `src/logic/fog.h` if preferred)
+- `src/logic/test_fog.cpp` (NEW)
 
 ## Implementation Steps
 1. Implement row visibility logic: 3 rows visible from currentRow
@@ -24,6 +25,7 @@ Load these before starting:
 4. Fog rule: `rowId > currentRow + (2 - nbRowsHidden)`
 5. Cap `nbRowsHidden` at 2
 6. Integrate with `getNbRowsHidden` from items
+7. Write unit tests in `test_fog.cpp`: visibility for 0/1/2+ monster-eyes, fog hide/show rows
 
 ## Constraints
 - Must use `game::logic::` namespace

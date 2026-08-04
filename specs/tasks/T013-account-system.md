@@ -17,6 +17,7 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/account.h` (NEW)
 - `src/logic/account.cpp` (NEW)
+- `src/logic/test_account.cpp` (NEW)
 
 ## Implementation Steps
 1. Create `account.h` with Account methods and helper functions in `game::logic::`
@@ -25,6 +26,7 @@ Load these before starting:
 4. Implement `Account::unlockHero()` (deduct gold, set locked=false)
 5. Implement `Account::spendGold()` and `addGold()`
 6. Default hero table: headless-knight (free), forest-warden (100), cave-shadow (200), desert-nomad (300)
+7. Write unit tests in `test_account.cpp`: unlock hero, insufficient gold, save/load round-trip
 
 ## Constraints
 - Must use `game::logic::` namespace

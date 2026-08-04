@@ -7,6 +7,12 @@ SRC       := src/main.cpp \
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame
 
+# Test configuration
+TEST_CXXFLAGS := -std=c++17 -Wall -Wextra -g -O0 -I src
+TEST_SRC      := src/test_main.cpp
+TEST_LOGIC_SRC := $(wildcard src/logic/test_*.cpp)
+TEST_TARGET   := build/run_tests
+
 all: $(TARGET)
 
 build:
@@ -25,6 +31,12 @@ run: $(TARGET)
 debug: CXXFLAGS += -g -O0 -DDEBUG
 debug: $(TARGET)
 
+test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
+$(TEST_TARGET): $(TEST_SRC) $(TEST_LOGIC_SRC) | build
+	$(CXX) $(TEST_CXXFLAGS) -o $@ $^ -lm
+
 clean:
 	rm -rf build
 
@@ -34,4 +46,4 @@ format:
 format-check:
 	clang-format --dry-run --Werror src/**/*.cpp src/**/*.h
 
-.PHONY: all run debug clean format format-check
+.PHONY: all run debug test clean format format-check

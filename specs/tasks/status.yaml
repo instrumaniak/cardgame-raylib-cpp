@@ -211,6 +211,11 @@ tasks:
       - T011
       - T012
       - T013
+      - T014
+      - T015
+      - T016
+      - T028
+      - T029
     phase: 6
     critical: false
   T027:
@@ -249,6 +254,13 @@ tasks:
     depends:
       - T001
     phase: 0
+    critical: false
+  T032:
+    name: Tests Setup
+    status: done
+    depends:
+      - T001
+    phase: 1
     critical: false
 phases:
   0: Scaffolding

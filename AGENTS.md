@@ -42,7 +42,7 @@ src/
 ```
 
 ## Task System
-Tasks live in `specs/tasks/`. Each task file (T001-T030) defines:
+Tasks live in `specs/tasks/`. Each task file (T001-T032) defines:
 - Goal, dependencies, spec references
 - Files to create/modify
 - Implementation steps
@@ -66,10 +66,11 @@ Tasks live in `specs/tasks/`. Each task file (T001-T030) defines:
 ## Specs
 - `specs/game/` — Tech-agnostic game logic (10 specs)
 - `specs/raylib-cpp/` — C++ implementation specs (6 specs)
-- `specs/tasks/` — Implementation task breakdown (30 tasks)
+- `specs/tasks/` — Implementation task breakdown (32 tasks)
 
 ## Testing
-- Unit tests in `src/logic/test_*.cpp`
+- Add unit tests in `src/logic/test_*.cpp` for pure, deterministic logic when it makes sense
+- Keep tests close to the task that owns the behavior
 - Tests compile WITHOUT raylib (pure logic only)
 - Use doctest framework
 - Deterministic seeding: `std::mt19937 rng(42)`

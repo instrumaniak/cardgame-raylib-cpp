@@ -24,6 +24,7 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/turn_flow.h` (NEW)
 - `src/logic/turn_flow.cpp` (NEW)
+- `src/logic/test_turn_flow.cpp` (NEW)
 
 ## Implementation Steps
 1. Create turn_flow.h with turn flow functions in `game::logic::` namespace
@@ -36,6 +37,7 @@ Load these before starting:
 8. Handle chest sub-location entry/exit
 9. Handle biome card transitions (new level)
 10. Handle carrot effect (+1 HP on position change)
+11. Write unit tests in `test_turn_flow.cpp`: state machine transitions, full turn sequence, integration tests
 
 ## Constraints
 - Must use `game::logic::` namespace

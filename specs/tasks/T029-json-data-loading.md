@@ -19,6 +19,7 @@ Load game data (heroes, cards, items, levels) from JSON files.
 ## Files to Create/Modify
 - `src/data/game_data.h` (NEW)
 - `src/data/game_data.cpp` (NEW)
+- `src/logic/test_game_data.cpp` (NEW)
 
 ## Implementation Steps
 1. Create game_data.h with load functions in `game::data::` namespace
@@ -26,6 +27,7 @@ Load game data (heroes, cards, items, levels) from JSON files.
 3. Implement loadHeroes(), loadCards(), loadItems(), loadLevels()
 4. Use nlohmann/json for parsing
 5. Fallback to hardcoded defaults if JSON missing
+6. Write unit tests in `test_game_data.cpp`: JSON parsing, fallback behavior, data matches spec tables
 
 ## Constraints
 - `game::data::` namespace

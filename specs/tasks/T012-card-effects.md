@@ -22,6 +22,7 @@ Load these before starting:
 ## Files to Create/Modify
 - `src/logic/card_effects.h` (NEW)
 - `src/logic/card_effects.cpp` (NEW)
+- `src/logic/test_card_effects.cpp` (NEW)
 
 ## Implementation Steps
 1. Create `card_effects.h` with `resolveCard()` dispatcher and individual resolvers in `game::logic::`
@@ -31,6 +32,7 @@ Load these before starting:
 5. Implement `resolveHeal()` with heal modifiers capped at max HP
 6. Implement `resolveGold()` with ruby 25% HP, amethyst double+consume, ring-of-greed -1 HP
 7. Implement `resolveItem()`, `resolveDrop()`, `resolvePlace()`, `resolveBiome()`, `resolveEnd()`
+8. Write unit tests in `test_card_effects.cpp`: monster damage, shield, heal, gold, item, place, end
 
 ## Constraints
 - Must use `game::logic::` namespace

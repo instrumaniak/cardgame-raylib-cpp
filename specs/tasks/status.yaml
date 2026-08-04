@@ -29,7 +29,7 @@ tasks:
     critical: false
   T005:
     name: Layout System
-    status: pending
+    status: done
     depends:
       - T001
     phase: 1

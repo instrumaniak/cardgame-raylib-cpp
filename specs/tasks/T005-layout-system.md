@@ -1,6 +1,6 @@
 # T005: Layout System
 
-## Status: pending
+## Status: done
 ## Phase: 1
 
 ## Goal
@@ -32,9 +32,14 @@ Load these before starting:
 - Const methods where appropriate
 
 ## Acceptance Criteria
-- [ ] `compute(1280, 720)` produces correct `dstRect`
-- [ ] `virtualToScreen` / `screenToVirtual` round-trip correctly
-- [ ] `make` succeeds
+- [x] `compute(1280, 720)` produces correct `dstRect`
+- [x] `virtualToScreen` / `screenToVirtual` round-trip correctly
+- [x] `make` succeeds
 
 ## Notes
-( filled in during/after implementation )
+- Used explicit member assignment for Rectangle (raylib C struct)
+- Letterbox: window wider → horizontal letterbox; taller → vertical pillarbox
+- Virtual coordinate conversion offsets by dstRect position and scales by scaleX/scaleY
+- Code review: removed unused `#include <algorithm>`
+- No UnloadRenderTexture needed — CloseWindow() handles cleanup
+- No zero-dimension guard needed — raylib prevents minimized window scenarios

@@ -49,14 +49,15 @@ Tasks live in `specs/tasks/`. Each task file (T001-T032) defines:
 - Acceptance criteria
 
 ### Working on a Task
-1. Read the task file fully
-2. Load referenced spec sections
-3. Implement following code style
-4. Code Formatting (`make format`), Code Review & Fixes
-5. Verify Acceptance Criteria (`make test`)
-6. Update Acceptance Criteria
-7. Mark status as `done` in the task file
-8. Update the Notes
+- Read the task file fully
+- Load referenced spec sections
+- Implement following code style
+- Check code format `make format-check` & fix Code Formatting (`make format`) 
+- Code Review & Fixes
+- Verify Acceptance Criteria (`make test`)
+- Update Acceptance Criteria
+- Mark status as `done` in the task file
+- Update the Notes
 
 ### Task Status Values
 - `pending` — not started

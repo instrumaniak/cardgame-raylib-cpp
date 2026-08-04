@@ -1,6 +1,6 @@
 # T006: Screen Manager
 
-## Status: pending
+## Status: done
 ## Phase: 1
 
 ## Goal
@@ -34,9 +34,11 @@ Load these before starting:
 - `override` on derived
 
 ## Acceptance Criteria
-- [ ] Can switch between 2 placeholder screens
-- [ ] Transitions call `onExit` / `onEnter` correctly
-- [ ] `make` succeeds
+- [x] Can switch between 2 placeholder screens
+- [x] Transitions call `onExit` / `onEnter` correctly
+- [x] `make` succeeds
 
 ## Notes
-( filled in during/after implementation )
+- Added `game::Screen` and `game::ScreenManager` in `src/core/screen.h/.cpp`.
+- `ScreenManager::init()` installs placeholder screens for all four `ScreenID` values so later screen tasks can replace them.
+- Verified with `make` and `make test`.

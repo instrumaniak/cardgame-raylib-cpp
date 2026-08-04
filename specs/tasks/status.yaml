@@ -50,7 +50,7 @@ tasks:
     critical: false
   T008:
     name: Main Entry
-    status: pending
+    status: done
     depends:
       - T003
       - T004

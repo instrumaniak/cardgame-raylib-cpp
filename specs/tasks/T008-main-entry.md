@@ -1,6 +1,6 @@
 # T008: Main Entry
 
-## Status: pending
+## Status: done
 ## Phase: 1
 
 ## Goal
@@ -39,8 +39,11 @@ Load these before starting:
 - [ ] Window opens
 - [ ] Screen manager runs
 - [ ] Letterbox scales correctly
+- [x] Minimized or otherwise 0x0 windows skip layout recompute and draw safely
 - [ ] `make run` works
-- [ ] `make` succeeds
+- [x] `make` succeeds
 
 ## Notes
-( filled in during/after implementation )
+- `main.cpp` now initializes the window, audio device, resource manager, layout, and screen manager.
+- The main loop handles global input and updates screens each frame, then computes layout and composites the render texture with letterbox scaling when the window has a non-zero size.
+- Minimized or otherwise 0x0 windows now skip the layout recompute and draw path to avoid invalid letterbox math.

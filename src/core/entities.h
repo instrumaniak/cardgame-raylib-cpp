@@ -1,11 +1,11 @@
 // src/core/entities.h — Entity structs that compose components
 #pragma once
 
-#include <string>
-#include <vector>
-
 #include "core/components.h"
 #include "core/types.h"
+
+#include <string>
+#include <vector>
 
 namespace game {
 

@@ -1,20 +1,20 @@
 // src/core/types.h — Core enums and data structs
 #pragma once
 
+#include "raylib.h"
+
 #include <array>
 #include <string>
 #include <vector>
 
-#include "raylib.h"
-
 namespace game {
 
-enum class ScreenID   { Home, Game, Win, Lose };
+enum class ScreenID { Home, Game, Win, Lose };
 enum class GameStatus { NotStarted, NotReady, Ready, HeroDrop, MonsterAttack, Win, Lose };
-enum class CardType   { Monster, Shield, Heal, Gold, Item, Drop, Place, Biome, EndCard };
-enum class Biome      { Forest, Cave, EnchantedLands, Desert, Abyss, Underworld };
+enum class CardType { Monster, Shield, Heal, Gold, Item, Drop, Place, Biome, EndCard };
+enum class Biome { Forest, Cave, EnchantedLands, Desert, Abyss, Underworld };
 enum class EffectType { DamageFlash, HealSparkle, CardFlip, GoldCoin, FogFade, ScreenShake };
-enum class Sfx        { Hit, Shield, Equip, DealCard, Chest, Coins, Lose, Win, None };
+enum class Sfx { Hit, Shield, Equip, DealCard, Chest, Coins, Lose, Win, None };
 
 struct Card {
   std::string slug;

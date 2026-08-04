@@ -1,1 +1,65 @@
+---
+Language: Cpp
 BasedOnStyle: LLVM
+
+# 2-space indent (JS/TS standard)
+IndentWidth: 2
+ContinuationIndentWidth: 2
+NamespaceIndentation: None
+AccessModifierOffset: -2
+
+# K&R braces (JS/TS standard)
+BreakBeforeBraces: Attach
+
+# Line length
+ColumnLimit: 100
+
+# Trailing commas
+Cpp11BracedListStyle: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# Alignment
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignOperands: Align
+AlignTrailingComments: true
+
+# Spacing
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInAngles: Never
+SpacesInContainerLiterals: true
+
+# Includes
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  # Own header first
+  - Regex: '^"\\.\\.\\/|^"'
+    Priority: 1
+  # Project headers
+  - Regex: '^"core/|^"screens/|^"logic/|^"render/|^"data/|^"input/|^"anim/'
+    Priority: 2
+  # System headers
+  - Regex: '^<.*>'
+    Priority: 3
+  # Vendor headers
+  - Regex: '^"raylib\\.h"'
+    Priority: 4
+
+# Pointer alignment (left = type belongs to name)
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# Penalty settings (encourage short functions)
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000

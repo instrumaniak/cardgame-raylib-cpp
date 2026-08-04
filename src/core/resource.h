@@ -1,10 +1,10 @@
 // src/core/resource.h — Flyweight resource cache for textures, sounds, and fonts
 #pragma once
 
+#include "raylib.h"
+
 #include <string>
 #include <unordered_map>
-
-#include "raylib.h"
 
 namespace game {
 

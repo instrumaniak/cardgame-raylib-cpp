@@ -27,4 +27,10 @@ debug: $(TARGET)
 clean:
 	rm -rf build
 
-.PHONY: all run debug clean
+format:
+	clang-format -i src/**/*.cpp src/**/*.h
+
+format-check:
+	clang-format --dry-run --Werror src/**/*.cpp src/**/*.h
+
+.PHONY: all run debug clean format format-check

@@ -243,6 +243,13 @@ tasks:
     depends: ~
     phase: 6
     critical: false
+  T031:
+    name: clang-format-precommit
+    status: done
+    depends:
+      - T001
+    phase: 0
+    critical: false
 phases:
   0: Scaffolding
   1: Foundation Types

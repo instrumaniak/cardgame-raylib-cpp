@@ -1,9 +1,9 @@
 // src/core/components.h — Reusable data types for entity composition
 #pragma once
 
-#include <vector>
-
 #include "core/types.h"
+
+#include <vector>
 
 namespace game {
 
@@ -38,8 +38,12 @@ struct AnimState {
   void start(float dur, bool lp = false);
   void update(float dt);
   [[nodiscard]] float value() const;
-  [[nodiscard]] bool isActive() const { return t < duration; }
-  [[nodiscard]] bool isDone() const { return t >= duration; }
+  [[nodiscard]] bool isActive() const {
+    return t < duration;
+  }
+  [[nodiscard]] bool isDone() const {
+    return t >= duration;
+  }
 };
 
 } // namespace game

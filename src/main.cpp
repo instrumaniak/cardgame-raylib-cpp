@@ -1,7 +1,7 @@
 // main.cpp — The Entry point
 
-#include "raylib.h"
 #include "core/constants.h"
+#include "raylib.h"
 
 int main(void) {
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);

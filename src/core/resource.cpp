@@ -2,10 +2,10 @@
 // Precondition: InitAudioDevice() must be called before loadAll()
 #include "core/resource.h"
 
+#include "raylib.h"
+
 #include <cassert>
 #include <string>
-
-#include "raylib.h"
 
 namespace game {
 
@@ -21,8 +21,7 @@ static std::string extFromPath(const std::string& path) {
   return ext ? std::string(ext + 1) : "";
 }
 
-static bool hasExtension(const std::string& path,
-                          const std::string& ext) {
+static bool hasExtension(const std::string& path, const std::string& ext) {
   std::string fileExt = extFromPath(path);
   return fileExt == ext;
 }
@@ -32,7 +31,8 @@ void ResourceManager::loadAll() {
   FilePathList imgFiles = LoadDirectoryFiles("assets/img");
   for (unsigned int i = 0; i < imgFiles.count; i++) {
     std::string path = imgFiles.paths[i];
-    if (!hasExtension(path, "png")) continue;
+    if (!hasExtension(path, "png"))
+      continue;
     std::string key = keyFromPath(path);
     _textures[key] = LoadTexture(path.c_str());
   }
@@ -42,7 +42,8 @@ void ResourceManager::loadAll() {
   FilePathList sndFiles = LoadDirectoryFiles("assets/audio");
   for (unsigned int i = 0; i < sndFiles.count; i++) {
     std::string path = sndFiles.paths[i];
-    if (!hasExtension(path, "mp3")) continue;
+    if (!hasExtension(path, "mp3"))
+      continue;
     std::string key = keyFromPath(path);
     _sounds[key] = LoadSound(path.c_str());
   }
@@ -52,7 +53,8 @@ void ResourceManager::loadAll() {
   FilePathList fntFiles = LoadDirectoryFiles("assets/fonts");
   for (unsigned int i = 0; i < fntFiles.count; i++) {
     std::string path = fntFiles.paths[i];
-    if (!hasExtension(path, "ttf")) continue;
+    if (!hasExtension(path, "ttf"))
+      continue;
     std::string key = keyFromPath(path);
     _fonts[key] = LoadFont(path.c_str());
   }

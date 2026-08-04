@@ -1,6 +1,6 @@
 # T004: Resource Manager
 
-## Status: pending
+## Status: done
 ## Phase: 1
 
 ## Goal
@@ -35,11 +35,14 @@ Load these before starting:
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Compiles without errors
-- [ ] `loadAll()` successfully loads assets
-- [ ] Accessors return const references
-- [ ] `make` succeeds
-- [ ] No memory leaks on unload
+- [x] Compiles without errors
+- [x] `loadAll()` successfully loads assets
+- [x] Accessors return const references
+- [x] `make` succeeds
+- [x] No memory leaks on unload
 
 ## Notes
-( filled in during/after implementation )
+- Implemented using raylib's `LoadDirectoryFiles` for directory scanning
+- Keys derived via `GetFileNameWithoutExt()` — filename without extension
+- Makefile updated with `mkdir -p $(dir $@)` for subdirectory build targets
+- 20 textures, 8 sounds, 2 fonts loaded from assets/img, assets/audio, assets/fonts

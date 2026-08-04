@@ -1,7 +1,8 @@
 CXX       := g++
 CXXFLAGS  := -std=c++17 -Wall -Wextra -O2 -I vendor/raylib -I src
 LDFLAGS   := -L vendor/raylib -lraylib -lm -lpthread -ldl -lrt -lX11
-SRC       := src/main.cpp
+SRC       := src/main.cpp \
+            src/core/resource.cpp
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame
 
@@ -14,6 +15,7 @@ $(TARGET): $(OBJ) | build
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 build/%.o: src/%.cpp | build
+	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 run: $(TARGET)

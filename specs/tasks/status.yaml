@@ -21,7 +21,7 @@ tasks:
     critical: true
   T004:
     name: Resource Manager
-    status: pending
+    status: done
     depends:
       - T001
       - T002

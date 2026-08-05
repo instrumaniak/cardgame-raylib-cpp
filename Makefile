@@ -10,9 +10,9 @@ OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame
 
 # Test configuration
-TEST_CXXFLAGS := -std=c++17 -Wall -Wextra -g -O0 -I src
+TEST_CXXFLAGS := -std=c++17 -Wall -Wextra -g -O0 -I vendor/raylib -I src
 TEST_SRC      := src/test_main.cpp
-TEST_LOGIC_SRC := $(wildcard src/logic/test_*.cpp)
+TEST_LOGIC_SRC := $(wildcard src/logic/*.cpp)
 TEST_TARGET   := build/run_tests
 
 all: $(TARGET)

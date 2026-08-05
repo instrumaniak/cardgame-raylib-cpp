@@ -61,7 +61,7 @@ tasks:
     critical: false
   T009:
     name: Board Generation
-    status: pending
+    status: done
     depends:
       - T003
     phase: 2

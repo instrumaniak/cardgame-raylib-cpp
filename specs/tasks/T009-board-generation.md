@@ -1,6 +1,6 @@
 # T009: Board Generation
 
-## Status: pending
+## Status: done
 ## Phase: 2
 
 ## Goal
@@ -35,13 +35,17 @@ Load these before starting:
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Generates correct board dimensions
-- [ ] First row has no monsters
-- [ ] Last row has biome/end card
-- [ ] Boss in second-to-last row center
-- [ ] Chest placement correct
-- [ ] `make test` passes
-- [ ] No warnings with `-Wall -Wextra`
+- [x] Generates correct board dimensions
+- [x] First row has no monsters
+- [x] Last row has biome/end card
+- [x] Boss in second-to-last row center
+- [x] Chest placement correct
+- [x] `make test` passes
+- [x] No warnings with `-Wall -Wextra`
 
 ## Notes
-( filled in during/after implementation )
+- Implemented: `getLevelConfig()`, `getChestConfig()`, `getAvailableBiomes()`, `weightedPick<T>()`, `generateBoard()`
+- Chest/item count scales with level: `1 + (level - 1) / 2`
+- Boss value uses last entry from `config.monsterValues`
+- Default-constructed `Card` has `cardType == Monster` (enum 0), so empty slot detection checks for Place/Item types instead
+- Makefile updated: `TEST_CXXFLAGS` now includes `-I vendor/raylib`, `TEST_LOGIC_SRC` compiles all `.cpp` in `src/logic/`

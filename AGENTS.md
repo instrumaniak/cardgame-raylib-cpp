@@ -84,3 +84,7 @@ Tasks live in `specs/tasks/`. Each task file (T001-T032) defines:
 - GameState passed by mutable reference
 - Logic layer has zero raylib includes
 - Render layer has zero game logic
+- Always use named constants instead of hardcoded string literals or magic values.
+  The codebase provides compile-time constants in headers like `core/slugs.h`
+  (`Cards::*`, `Heroes::*`). Hardcoded strings are discouraged — they cause
+  silent bugs when identifiers change and are not caught by the compiler.

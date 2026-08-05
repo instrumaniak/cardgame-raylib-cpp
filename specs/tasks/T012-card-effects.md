@@ -1,6 +1,6 @@
 # T012: Card Effect Resolution
 
-## Status: pending
+## Status: done
 ## Phase: 2
 ## Critical: true
 
@@ -42,12 +42,15 @@ Load these before starting:
 - Depends on combat.h and items.h
 
 ## Acceptance Criteria
-- [ ] Monster deals correct damage
-- [ ] Shield adds shield value
-- [ ] Heal restores HP capped at max
-- [ ] Gold adds correct amount
-- [ ] All card types resolve correctly
-- [ ] `make test` passes
+- [x] Monster deals correct damage
+- [x] Shield adds shield value
+- [x] Heal restores HP capped at max
+- [x] Gold adds correct amount
+- [x] All card types resolve correctly
+- [x] `make test` passes
 
 ## Notes
-( filled in during/after implementation )
+- Implemented with mutable PlayerState& and std::vector<Card>& for items (needed for athelas and amethyst consumption)
+- RNG parameter added to resolveGold for ruby's 25% chance (deterministic testing with fixed seeds)
+- Ring-of-vitality + cursed-shield interaction: ring-of-vitality takes priority (shield→heal), but cursed-shield still caps max HP to 1
+- applyAmethyst from items.h doubles total gold, but spec requires adding card.value again — implemented manually instead

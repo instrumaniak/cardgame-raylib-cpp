@@ -1226,6 +1226,7 @@ namespace game { namespace logic {
 | `using namespace` in headers | Pollutes includer's namespace | Only in .cpp files |
 | `auto x = ...` (general case) | Reduces readability for humans/agents | Explicit type annotation (see §10) |
 | Per-function error structs | Code duplication, inconsistent APIs | `Result<T>` template (see §9) |
+| Hardcoded string literals for identifiers | Silent bugs when slugs change, not caught by compiler | Named constants from `core/slugs.h` (`Cards::*`, `Heroes::*`) |
 
 ### Specific C++ Anti-patterns That Look Like JS Mistakes
 
@@ -1241,6 +1242,12 @@ int x = 5;
 
 // WRONG: Missing const on read-only parameters
 std::string getName(PlayerState player) { return player.heroSlug; }  // copies!
+
+// WRONG: Hardcoded string literals for identifiers
+card.slug = "forest";  // silent bug if slug changes
+
+// CORRECT: Named constants from core/slugs.h
+card.slug = std::string(Cards::Forest);
 ```
 
 ### Good Example

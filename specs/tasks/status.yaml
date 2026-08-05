@@ -83,7 +83,7 @@ tasks:
     critical: true
   T012:
     name: Card Effects
-    status: pending
+    status: done
     depends:
       - T003
       - T010

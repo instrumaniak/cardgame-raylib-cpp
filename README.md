@@ -1,4 +1,4 @@
-# Fordard Game Jam Version — Raylib Recreation For Study
+# Forward Game Jam Version — Raylib Recreation For Study
 
 A roguelike card-dungeon crawler.
 
@@ -17,7 +17,7 @@ make run
 ## Project Structure
 
 ```
-cardgame-study-bevy/
+cardgame-raylib/
 ├── specs/              # Game and implementation specs
 ├── assets/             # Game assets (images, audio, fonts, data)
 ├── src/                # C++ source code

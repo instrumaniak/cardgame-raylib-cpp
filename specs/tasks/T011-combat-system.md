@@ -1,6 +1,6 @@
 # T011: Combat System
 
-## Status: pending
+## Status: done
 ## Phase: 2
 ## Critical: true
 
@@ -38,12 +38,17 @@ Load these before starting:
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Shield absorbs damage correctly
-- [ ] Overflow bleeds through
-- [ ] Invisibility cloak dodges on even HP
-- [ ] Ring-of-courage gives shield at 1 HP
-- [ ] `make test` passes
-- [ ] No warnings with `-Wall -Wextra`
+- [x] Shield absorbs damage correctly
+- [x] Overflow bleeds through
+- [x] Invisibility cloak dodges on even HP
+- [x] Ring-of-courage gives shield at 1 HP
+- [x] `make test` passes
+- [x] No warnings with `-Wall -Wextra`
 
 ## Notes
-( filled in during/after implementation )
+- Implemented `applyDamage()` with full item modifier support (monster-skull, dragon-wing, emerald, ring-of-courage)
+- Implemented `applyToShield()` for shield damage absorption
+- Implemented `checkInvisibilityCloak()` for dodge on even HP
+- Implemented `calcMaxHp()` using existing `getHeroLifeMaxModifier()` from items.h
+- All 35 test cases pass (704 assertions)
+- Format check passes

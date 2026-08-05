@@ -19,6 +19,7 @@ inline constexpr std::string_view RingOfGreed = "ring-of-greed";
 inline constexpr std::string_view CursedShield = "cursed-shield";
 inline constexpr std::string_view Athelas = "athelas";
 inline constexpr std::string_view Amethyst = "amethyst";
+inline constexpr std::string_view InvisibilityCloak = "invisibility-cloak";
 inline constexpr std::string_view DragonWing = "dragon-wing";
 inline constexpr std::string_view Carrot = "carrot";
 inline constexpr std::string_view Fossil = "fossil";

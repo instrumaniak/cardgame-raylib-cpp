@@ -75,7 +75,7 @@ tasks:
     critical: true
   T011:
     name: Combat System
-    status: pending
+    status: done
     depends:
       - T003
       - T010

@@ -50,14 +50,19 @@ int main() {
 
     BeginDrawing();
     ClearBackground(BLACK);
-    DrawTexturePro(layout.renderTexture.texture,
-                   {
-                     0.0f,
-                     0.0f,
-                     static_cast<float>(layout.renderTexture.texture.width),
-                     -static_cast<float>(layout.renderTexture.texture.height),
-                   },
-                   layout.dstRect, {0.0f, 0.0f}, 0.0f, WHITE);
+    DrawTexturePro(
+      layout.renderTexture.texture,
+      {
+        0.0f,
+        0.0f,
+        static_cast<float>(layout.renderTexture.texture.width),
+        -static_cast<float>(layout.renderTexture.texture.height),
+      },
+      layout.dstRect,
+      {0.0f, 0.0f},
+      0.0f,
+      WHITE
+    );
     EndDrawing();
   }
 

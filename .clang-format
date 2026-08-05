@@ -21,7 +21,10 @@ AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 
 # Alignment
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: BlockIndent
+BinPackArguments: false
+BinPackParameters: false
+
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignOperands: Align
@@ -53,7 +56,7 @@ IncludeCategories:
   - Regex: '^"raylib\\.h"'
     Priority: 4
 
-# Pointer alignment (left = type belongs to name)
+# Pointer alignment (left = pointer belongs to the type)
 PointerAlignment: Left
 ReferenceAlignment: Left
 

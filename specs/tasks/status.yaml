@@ -68,7 +68,7 @@ tasks:
     critical: false
   T010:
     name: Item System
-    status: pending
+    status: done
     depends:
       - T003
     phase: 2

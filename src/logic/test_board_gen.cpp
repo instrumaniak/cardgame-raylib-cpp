@@ -1,4 +1,5 @@
 // src/logic/test_board_gen.cpp — Unit tests for board generation
+#include "core/slugs.h"
 #include "doctest/doctest.h"
 #include "logic/board_gen.h"
 
@@ -42,10 +43,10 @@ TEST_CASE("getAvailableBiomes") {
   SUBCASE("Level 1 — no visited") {
     auto biomes = getAvailableBiomes(1, {});
     CHECK(biomes.size() == 4);
-    CHECK(biomes[0] == "forest");
-    CHECK(biomes[1] == "cave");
-    CHECK(biomes[2] == "enchanted_lands");
-    CHECK(biomes[3] == "desert");
+    CHECK(biomes[0] == Cards::Forest);
+    CHECK(biomes[1] == Cards::Cave);
+    CHECK(biomes[2] == Cards::EnchantedLands);
+    CHECK(biomes[3] == Cards::Desert);
   }
 
   SUBCASE("Level 1 — one visited") {
@@ -56,7 +57,7 @@ TEST_CASE("getAvailableBiomes") {
   SUBCASE("Level 2") {
     auto biomes = getAvailableBiomes(2, {});
     CHECK(biomes.size() == 1);
-    CHECK(biomes[0] == "abyss");
+    CHECK(biomes[0] == Cards::Abyss);
   }
 
   SUBCASE("Level 3 — all visited") {
@@ -213,7 +214,7 @@ TEST_CASE("generateBoard — boss always in center of second-to-last row") {
 }
 
 TEST_CASE("getChestConfig — regular chest") {
-  LevelConfig cfg = getChestConfig("chest", 1);
+  LevelConfig cfg = getChestConfig(Cards::Chest, 1);
   CHECK(cfg.rows == 2);
   CHECK(cfg.itemRate == 70);
   CHECK(cfg.shieldRate == 10);
@@ -222,13 +223,13 @@ TEST_CASE("getChestConfig — regular chest") {
 }
 
 TEST_CASE("getChestConfig — golden chest") {
-  LevelConfig cfg = getChestConfig("golden_chest", 1);
+  LevelConfig cfg = getChestConfig(Cards::GoldenChest, 1);
   CHECK(cfg.rows == 3);
   CHECK(cfg.itemRate == 55);
 }
 
 TEST_CASE("getChestConfig — level 5 wider rows") {
-  LevelConfig cfg = getChestConfig("chest", 5);
+  LevelConfig cfg = getChestConfig(Cards::Chest, 5);
   CHECK(cfg.cardsPerRow[0] == 20);
   CHECK(cfg.cardsPerRow[1] == 30);
   CHECK(cfg.cardsPerRow[2] == 50);

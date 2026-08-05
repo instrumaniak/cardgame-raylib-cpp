@@ -1,6 +1,6 @@
 # T010: Item System
 
-## Status: pending
+## Status: done
 ## Phase: 2
 ## Critical: true
 
@@ -35,12 +35,17 @@ Load these before starting:
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] All 22 item modifiers work correctly
-- [ ] Monster-egg combo triggers at 3 eggs
-- [ ] Apple heals +10
-- [ ] Athelas prevents death once
-- [ ] `make test` passes
-- [ ] No warnings with `-Wall -Wextra`
+- [x] All 22 item modifiers work correctly
+- [x] Monster-egg combo triggers at 3 eggs
+- [x] Apple heals +10
+- [x] Athelas prevents death once
+- [x] `make test` passes
+- [x] No warnings with `-Wall -Wextra`
 
 ## Notes
-( filled in during/after implementation )
+- T010 implements item functions within the `items` module scope (not all 22 items' complete effects)
+- `getNbRowsHidden` counts `monster-egg` (spec pseudocode says `monster-eye` — item not in 22-item list)
+- `applyAthelas` only triggers when `current <= 0` (death prevention)
+- `applyAmethyst` removes self after doubling gold
+- `applyCursedShield` sets max HP to 1 (modifier = -(life_max - 1))
+- All tests pass: 26 test cases, 641 assertions

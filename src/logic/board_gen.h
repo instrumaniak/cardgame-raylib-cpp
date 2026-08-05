@@ -7,6 +7,7 @@
 
 #include <random>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -41,7 +42,7 @@ T weightedPick(const std::vector<std::pair<T, int>>& rates, std::mt19937& rng) {
 LevelConfig getLevelConfig(int level);
 
 // Chest sub-location configuration
-LevelConfig getChestConfig(const std::string& chestType, int level);
+LevelConfig getChestConfig(std::string_view chestType, int level);
 
 // Available biomes for a level, excluding visited ones
 std::vector<std::string> getAvailableBiomes(int level, const std::vector<std::string>& visited);

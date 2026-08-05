@@ -1,6 +1,8 @@
 // src/logic/board_gen.cpp — Board generation implementation
 #include "logic/board_gen.h"
 
+#include "core/slugs.h"
+
 #include <algorithm>
 
 namespace game::logic {
@@ -25,8 +27,8 @@ LevelConfig getLevelConfig(int level) {
   return configs[idx];
 }
 
-LevelConfig getChestConfig(const std::string& chestType, int level) {
-  if (chestType == "golden_chest") {
+LevelConfig getChestConfig(std::string_view chestType, int level) {
+  if (chestType == Cards::GoldenChest) {
     LevelConfig cfg{3, {5, 10, 85}, 0, 15, 15, 15, 55, {}};
     if (level == 5) {
       cfg.cardsPerRow = {20, 30, 50};
@@ -43,9 +45,12 @@ LevelConfig getChestConfig(const std::string& chestType, int level) {
 
 std::vector<std::string> getAvailableBiomes(int level, const std::vector<std::string>& visited) {
   static const std::vector<std::string> biomesByLevel[3] = {
-    {"forest", "cave", "enchanted_lands", "desert"}, // level 1
-    {"abyss"},                                       // level 2
-    {"underworld"},                                  // level 3
+    {std::string(Cards::Forest),
+     std::string(Cards::Cave),
+     std::string(Cards::EnchantedLands),
+     std::string(Cards::Desert)},     // level 1
+    {std::string(Cards::Abyss)},      // level 2
+    {std::string(Cards::Underworld)}, // level 3
   };
 
   if (level < 1 || level > 3) {
@@ -64,8 +69,8 @@ std::vector<std::string> getAvailableBiomes(int level, const std::vector<std::st
 }
 
 // Create a minimal card with type and value
-static Card makeCard(CardType type, int value, const std::string& slug = "") {
-  return Card{slug, type, value, "", "", 0, 0, 0, 0};
+static Card makeCard(CardType type, int value, std::string_view slug = "") {
+  return Card{std::string(slug), type, value, "", "", 0, 0, 0, 0};
 }
 
 // Pick a random card type based on level rates (excluding monsters for first row)
@@ -112,7 +117,9 @@ GeneratedBoard generateBoard(
     std::uniform_int_distribution<int> slotDist(0, 2);
     int row = rowDist(rng);
     int slot = slotDist(rng);
-    std::string slug = weightedPick<std::string>({{"chest", 80}, {"golden_chest", 20}}, rng);
+    std::string slug = weightedPick<std::string>(
+      {{std::string(Cards::Chest), 80}, {std::string(Cards::GoldenChest), 20}}, rng
+    );
     board[row][slot] = CardSlot{makeCard(CardType::Place, 0, slug), false};
   }
 
@@ -123,7 +130,7 @@ GeneratedBoard generateBoard(
     std::uniform_int_distribution<int> slotDist(0, 2);
     int row = rowDist(rng);
     int slot = slotDist(rng);
-    board[row][slot] = CardSlot{makeCard(CardType::Item, 0, "item"), false};
+    board[row][slot] = CardSlot{makeCard(CardType::Item, 0, Cards::Item), false};
   }
 
   // Step 3: Fill first row (row 0) — no monsters
@@ -142,7 +149,7 @@ GeneratedBoard generateBoard(
   result.hasEndCard = (level == 6);
 
   if (level == 6) {
-    board[totalRows - 1][1] = CardSlot{makeCard(CardType::EndCard, 0, "end"), false};
+    board[totalRows - 1][1] = CardSlot{makeCard(CardType::EndCard, 0, Cards::End), false};
     result.biome = "";
   } else {
     result.biome = availableBiomes.empty() ? "" : availableBiomes[0];
@@ -162,7 +169,7 @@ GeneratedBoard generateBoard(
   // Step 5: Second-to-last row — BOSS monster in center slot
   int bossRow = totalRows - 2;
   int bossValue = config.monsterValues.back();
-  board[bossRow][1] = CardSlot{makeCard(CardType::Monster, bossValue, "boss"), false};
+  board[bossRow][1] = CardSlot{makeCard(CardType::Monster, bossValue, Cards::Boss), false};
 
   // Step 6: Fill remaining normal rows with weighted random
   // Rows 1 to totalRows-3 (inclusive), skipping already-filled slots
@@ -182,7 +189,7 @@ GeneratedBoard generateBoard(
       if (ct == CardType::Place || ct == CardType::Item) {
         continue; // don't overwrite chests/items
       }
-      if (board[row][col].card.slug == "boss") {
+      if (board[row][col].card.slug == Cards::Boss) {
         continue; // don't overwrite boss
       }
       emptySlots.push_back(col);

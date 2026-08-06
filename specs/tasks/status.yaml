@@ -126,7 +126,7 @@ tasks:
     critical: true
   T017:
     name: Card Rendering
-    status: pending
+    status: done
     depends:
       - T003
       - T004

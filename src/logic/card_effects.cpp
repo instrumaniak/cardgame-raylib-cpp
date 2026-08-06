@@ -164,7 +164,7 @@ CardEffect resolveBiome(const Card& card) {
 
 CardEffect resolveEnd() {
   CardEffect effect{};
-  effect.message = "end";
+  effect.message = Cards::End;
   effect.soundEffect = Sfx::Win;
   return effect;
 }

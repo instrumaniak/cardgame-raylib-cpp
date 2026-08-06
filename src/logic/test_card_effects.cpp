@@ -8,6 +8,8 @@
 using namespace game;
 using namespace game::logic;
 
+using game::Cards::End;
+
 static Card makeItem(std::string_view slug) {
   Card card;
   card.slug = std::string(slug);
@@ -538,7 +540,7 @@ TEST_CASE("resolveBiome — returns slug in message") {
 
 TEST_CASE("resolveEnd — returns end message") {
   CardEffect effect = resolveEnd();
-  CHECK(effect.message == "end");
+  CHECK(effect.message == End);
   CHECK(effect.soundEffect == Sfx::Win);
 }
 
@@ -588,7 +590,7 @@ TEST_CASE("resolveCard — dispatch by CardType") {
     item.slug = std::string(Cards::Ruby);
     item.cardType = CardType::Item;
     CardEffect effect = resolveCard(item, player, items, rng);
-    CHECK(effect.message == "ruby");
+    CHECK(effect.message == Cards::Ruby);
   }
 
   SUBCASE("EndCard dispatches to resolveEnd") {

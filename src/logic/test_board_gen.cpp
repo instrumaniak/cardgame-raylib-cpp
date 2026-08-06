@@ -9,6 +9,12 @@
 using namespace game;
 using namespace game::logic;
 
+using game::Cards::Abyss;
+using game::Cards::Cave;
+using game::Cards::EnchantedLands;
+using game::Cards::Forest;
+using game::Cards::Underworld;
+
 TEST_CASE("weightedPick returns values proportional to rates") {
   std::mt19937 rng(42);
   std::map<std::string, int> counts;
@@ -29,7 +35,7 @@ TEST_CASE("weightedPick returns values proportional to rates") {
 TEST_CASE("generateBoard — correct dimensions") {
   std::mt19937 rng(42);
   LevelConfig cfg = getLevelConfig(1);
-  auto board = generateBoard(cfg, 1, {"forest", "cave"}, rng);
+  auto board = generateBoard(cfg, 1, {std::string(Forest), std::string(Cave)}, rng);
 
   CHECK(board.slots.size() == 15);
   for (const auto& row : board.slots) {
@@ -40,7 +46,7 @@ TEST_CASE("generateBoard — correct dimensions") {
 TEST_CASE("generateBoard — first row has no monsters") {
   std::mt19937 rng(42);
   LevelConfig cfg = getLevelConfig(1);
-  auto board = generateBoard(cfg, 1, {"forest", "cave"}, rng);
+  auto board = generateBoard(cfg, 1, {std::string(Forest), std::string(Cave)}, rng);
 
   for (int col = 0; col < 3; ++col) {
     CHECK(board.slots[0][col].card.cardType != CardType::Monster);
@@ -51,7 +57,7 @@ TEST_CASE("generateBoard — last row has biome or end card") {
   SUBCASE("Level 1 — biome cards") {
     std::mt19937 rng(42);
     LevelConfig cfg = getLevelConfig(1);
-    auto board = generateBoard(cfg, 1, {"forest", "cave"}, rng);
+    auto board = generateBoard(cfg, 1, {std::string(Forest), std::string(Cave)}, rng);
 
     int biomeCount = 0;
     for (int col = 0; col < 3; ++col) {
@@ -82,7 +88,7 @@ TEST_CASE("generateBoard — last row has biome or end card") {
 TEST_CASE("generateBoard — boss in second-to-last row center") {
   std::mt19937 rng(42);
   LevelConfig cfg = getLevelConfig(1);
-  auto board = generateBoard(cfg, 1, {"forest", "cave"}, rng);
+  auto board = generateBoard(cfg, 1, {std::string(Forest), std::string(Cave)}, rng);
 
   CHECK(board.slots[13][1].card.cardType == CardType::Monster);
   CHECK(board.slots[13][1].card.value == 9); // max of level 1 monsterValues
@@ -91,7 +97,7 @@ TEST_CASE("generateBoard — boss in second-to-last row center") {
 TEST_CASE("generateBoard — chest placement in valid rows") {
   std::mt19937 rng(42);
   LevelConfig cfg = getLevelConfig(2);
-  auto board = generateBoard(cfg, 2, {"abyss"}, rng);
+  auto board = generateBoard(cfg, 2, {std::string(Abyss)}, rng);
 
   for (int row = 0; row < 15; ++row) {
     for (int col = 0; col < 3; ++col) {
@@ -106,7 +112,7 @@ TEST_CASE("generateBoard — no monster in first row across many seeds") {
   for (int seed = 0; seed < 100; ++seed) {
     std::mt19937 rng(seed);
     LevelConfig cfg = getLevelConfig(1);
-    auto board = generateBoard(cfg, 1, {"forest", "cave"}, rng);
+    auto board = generateBoard(cfg, 1, {std::string(Forest), std::string(Cave)}, rng);
 
     for (int col = 0; col < 3; ++col) {
       CHECK(board.slots[0][col].card.cardType != CardType::Monster);
@@ -120,7 +126,7 @@ TEST_CASE("generateBoard — last row biome/end across many seeds") {
 
     SUBCASE("Level 1") {
       LevelConfig cfg = getLevelConfig(1);
-      auto board = generateBoard(cfg, 1, {"forest", "cave"}, rng);
+      auto board = generateBoard(cfg, 1, {std::string(Forest), std::string(Cave)}, rng);
       bool hasSpecial = false;
       for (int col = 0; col < 3; ++col) {
         auto type = board.slots[14][col].card.cardType;
@@ -149,7 +155,7 @@ TEST_CASE("generateBoard — boss always in center of second-to-last row") {
   for (int seed = 0; seed < 100; ++seed) {
     std::mt19937 rng(seed);
     LevelConfig cfg = getLevelConfig(3);
-    auto board = generateBoard(cfg, 3, {"underworld"}, rng);
+    auto board = generateBoard(cfg, 3, {std::string(Underworld)}, rng);
 
     CHECK(board.slots[13][1].card.cardType == CardType::Monster);
     CHECK(board.slots[13][1].card.value >= 1);

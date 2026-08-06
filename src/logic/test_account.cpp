@@ -6,6 +6,9 @@
 using namespace game;
 using namespace game::logic;
 
+using game::Lang::English;
+using game::Lang::French;
+
 TEST_CASE("createDefaultAccount") {
   Account account = createDefaultAccount();
 
@@ -14,7 +17,7 @@ TEST_CASE("createDefaultAccount") {
   }
 
   SUBCASE("Language defaults to English") {
-    CHECK(account.language == "en");
+    CHECK(account.language == English);
   }
 
   SUBCASE("Has 4 heroes") {
@@ -162,7 +165,7 @@ TEST_CASE("save/load round-trip") {
     Account loaded = loadAccount(json);
 
     CHECK(loaded.gold == 250);
-    CHECK(loaded.language == "en");
+    CHECK(loaded.language == English);
     CHECK(loaded.heroes.size() == 4);
     CHECK(loaded.heroes[0].slug == original.heroes[0].slug);
     CHECK(loaded.heroes[0].locked == original.heroes[0].locked);
@@ -177,7 +180,7 @@ TEST_CASE("save/load round-trip") {
   SUBCASE("Modified account round-trips") {
     Account account = createDefaultAccount();
     account.gold = 500;
-    account.language = "fr";
+    account.language = French;
     unlockHero(account.heroes[1], account);
     account.heroes[0].life = 10;
     account.heroes[0].gold = 25;
@@ -186,7 +189,7 @@ TEST_CASE("save/load round-trip") {
     Account loaded = loadAccount(json);
 
     CHECK(loaded.gold == 450);
-    CHECK(loaded.language == "fr");
+    CHECK(loaded.language == French);
     CHECK(loaded.heroes[0].life == 10);
     CHECK(loaded.heroes[0].gold == 25);
     CHECK(loaded.heroes[1].locked == false);
@@ -196,7 +199,7 @@ TEST_CASE("save/load round-trip") {
     Account loaded = loadAccount("not valid json {{{");
     CHECK(loaded.gold == 0);
     CHECK(loaded.heroes.size() == 4);
-    CHECK(loaded.language == "en");
+    CHECK(loaded.language == English);
   }
 
   SUBCASE("Empty JSON returns default account") {

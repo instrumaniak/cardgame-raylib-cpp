@@ -78,3 +78,8 @@ inline constexpr std::string_view Mage = "mage";
 inline constexpr std::string_view Spirit = "spirit";
 inline constexpr std::string_view Anubis = "anubis";
 } // namespace game::Heroes
+
+namespace game::Lang {
+inline constexpr std::string_view English = "en";
+inline constexpr std::string_view French = "fr";
+} // namespace game::Lang

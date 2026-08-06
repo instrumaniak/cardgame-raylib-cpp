@@ -1,6 +1,6 @@
 # T017: Card Rendering
 
-## Status: pending
+## Status: done
 ## Phase: 4
 
 ## Goal
@@ -31,10 +31,14 @@ Draw any card type at any position with correct frame, sprite, and text.
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Can draw all card types
-- [ ] Frame colors match spec
-- [ ] Face-up shows name + value
-- [ ] Face-down shows card-back
+- [x] Can draw all card types
+- [x] Frame colors match spec
+- [x] Face-up shows name + value
+- [x] Face-down shows card-back
 
 ## Notes
-( filled in during/after implementation )
+- Implemented `drawCard()` and `drawCardBack()` in `game::render::` namespace
+- Background colors match spec: Monster=#53428d, Heal=#d94743, Shield=#616161, Gold=#fbc02d, Item/Drop/Biome=dark, Place=#f3d19f, EndCard=gold glow
+- Frame textures: card-frame-purple/red/gray/yellow, hero-frame, chest-frame, light-frame
+- Sprite rendered centered within card with 8px margin for frame overlay
+- Text uses default raylib font (can be refined with specific font later)

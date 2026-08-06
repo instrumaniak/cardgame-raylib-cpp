@@ -6,6 +6,13 @@
 using namespace game;
 using namespace game::logic;
 
+using game::Cards::Abyss;
+using game::Cards::Cave;
+using game::Cards::Desert;
+using game::Cards::EnchantedLands;
+using game::Cards::Forest;
+using game::Cards::Underworld;
+
 TEST_CASE("getLevelConfig returns correct configs for all 6 levels") {
   SUBCASE("Level 1") {
     LevelConfig cfg = getLevelConfig(1);
@@ -155,12 +162,14 @@ TEST_CASE("getAvailableBiomes") {
   }
 
   SUBCASE("Level 1 — one visited") {
-    auto biomes = getAvailableBiomes(1, {"forest"});
+    auto biomes = getAvailableBiomes(1, {std::string(Forest)});
     CHECK(biomes.size() == 3);
   }
 
   SUBCASE("Level 1 — all visited") {
-    auto biomes = getAvailableBiomes(1, {"forest", "cave", "enchanted_lands", "desert"});
+    auto biomes = getAvailableBiomes(
+      1, {std::string(Forest), std::string(Cave), std::string(EnchantedLands), std::string(Desert)}
+    );
     CHECK(biomes.empty());
   }
 
@@ -171,7 +180,7 @@ TEST_CASE("getAvailableBiomes") {
   }
 
   SUBCASE("Level 2 — all visited") {
-    auto biomes = getAvailableBiomes(2, {"abyss"});
+    auto biomes = getAvailableBiomes(2, {std::string(Abyss)});
     CHECK(biomes.empty());
   }
 
@@ -182,7 +191,7 @@ TEST_CASE("getAvailableBiomes") {
   }
 
   SUBCASE("Level 3 — all visited") {
-    auto biomes = getAvailableBiomes(3, {"underworld"});
+    auto biomes = getAvailableBiomes(3, {std::string(Underworld)});
     CHECK(biomes.empty());
   }
 

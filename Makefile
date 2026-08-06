@@ -6,7 +6,9 @@ SRC       := src/main.cpp \
             src/core/layout.cpp \
             src/core/screen.cpp \
             src/input/input.cpp \
-            src/render/card_draw.cpp
+            src/render/card_draw.cpp \
+            src/render/board_draw.cpp \
+            src/logic/items.cpp
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame
 

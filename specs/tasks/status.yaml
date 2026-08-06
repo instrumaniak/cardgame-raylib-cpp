@@ -134,7 +134,7 @@ tasks:
     critical: false
   T018:
     name: Board Rendering
-    status: pending
+    status: done
     depends:
       - T017
       - T014

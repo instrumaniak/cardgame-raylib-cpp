@@ -1,6 +1,6 @@
 # T018: Board Rendering
 
-## Status: pending
+## Status: done
 ## Phase: 4
 
 ## Goal
@@ -33,9 +33,11 @@ Draw the full board grid with correct fog behavior.
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Board centered correctly
-- [ ] Fog shows/hides rows per monster-eye count
-- [ ] Active row highlighted
+- [x] Board centered correctly
+- [x] Fog shows/hides rows per monster-eye count
+- [x] Active row highlighted
 
 ## Notes
-( filled in during/after implementation )
+- Chest sub-location overlay deferred to Game Screen (T024) since spec API has no chest parameters
+- Active row uses `Fade(GoldBg, 0.3f)` highlight; animation enhancement for T028
+- `getNbRowsHidden` already existed in `logic/items.h` — reused instead of duplicating in `fog.h`

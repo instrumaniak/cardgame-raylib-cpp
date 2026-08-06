@@ -21,6 +21,70 @@ Implement all drawing functions: HOME screen (hero selection), GAME screen (boar
 - All public APIs must be inside `game::render::` namespace
 - Button struct is defined in `core/types.h` (inside `game::` namespace)
 
+## Typography
+
+All text rendering goes through a centralized typography system. No raw `DrawText()` or `DrawTextEx()` calls in render code — use `render::drawText()` and `render::measureText()` instead. This matches the original game's CSS where fonts and sizes are defined once and inherited.
+
+### Font Assignment (matches original game CSS)
+
+| Font | Role | Source |
+|------|------|--------|
+| PearSoda | Display/decorative: card stats, hero names, end-game titles | `assets/fonts/PearSoda.ttf` |
+| Zepto-Regular | Body/UI: all other text (labels, descriptions, buttons) | `assets/fonts/Zepto-Regular.ttf` |
+
+### Text Styles
+
+| TextStyle | Font | Size | Use Cases |
+|-----------|------|------|-----------|
+| `Title` | PearSoda | 64px | End-game titles ("Victory!", "Defeat") |
+| `Heading` | Zepto | 24px | Subtitles, section headers, unlock button text |
+| `Body` | Zepto | 16px | Default text, descriptions, hero name, tooltips |
+| `CardStat` | PearSoda | 32px | Card values (HP, shield, damage), hero stats |
+| `Label` | Zepto | 12px | Small UI text, inventory labels, effect text |
+
+### API
+
+```cpp
+// src/core/typography.h
+#pragma once
+#include "core/resource.h"
+#include "raylib.h"
+
+namespace game::render {
+
+enum class TextStyle {
+  Title,     // PearSoda 64px — end-game titles
+  Heading,   // Zepto 24px — subtitles, section headers
+  Body,      // Zepto 16px — default text
+  CardStat,  // PearSoda 32px — card values, hero stats
+  Label,     // Zepto 12px — small UI text
+};
+
+void drawText(const ResourceManager& res, TextStyle style,
+              const char* text, float x, float y, Color color);
+
+Vector2 measureText(const ResourceManager& res, TextStyle style,
+                    const char* text);
+
+} // namespace game::render
+```
+
+### Usage Pattern
+
+```cpp
+// WRONG — raw DrawText with magic numbers:
+DrawText(hero.name.c_str(), x, y, 20, WHITE);
+DrawText("Inventory", x, y, 12, WHITE);
+
+// CORRECT — typed, consistent:
+render::drawText(res, TextStyle::Body, hero.name.c_str(), x, y, WHITE);
+render::drawText(res, TextStyle::Label, "Inventory", x, y, WHITE);
+```
+
+### Text Outline (for card stats)
+
+Card stat numbers use an 8-directional outline effect for legibility over varied card backgrounds. This matches the original game's CSS text-shadow on `.card .card-front .value` (8-directional parchment outline in `#f4e3cb`). Implement as a separate `drawTextOutlined()` function or handled internally by `drawText()` when style is `CardStat`.
+
 ## Card Rendering
 
 ```cpp
@@ -165,7 +229,7 @@ void drawGoldDisplay(const ResourceManager& res, int gold);
 
 ### HOME Screen Layout
 
-- Title "Drop the Volunteer" centered, big (PearSoda font, ~48px)
+- Title "Drop the Volunteer" centered, big (logo image or PearSoda Title style)
 - 8 hero cards in 2 rows × 4 columns grid
   - Each shows hero art, name, stats (HP, shield)
   - Locked heroes show lock icon + cost
@@ -195,7 +259,7 @@ void drawLoseOverlay(const ResourceManager& res, int goldEarned, int totalGold,
 ### WIN Screen
 
 - Semi-transparent dark overlay over game screen
-- "Victory!" title (large, gold)
+- "Victory!" title (large, gold, TextStyle::Title)
 - Stats: Hero name, Gold earned, Total gold, Score
 - "Play Again" button → new game (same hero)
 - "Main Menu" button → HOME screen
@@ -203,7 +267,7 @@ void drawLoseOverlay(const ResourceManager& res, int goldEarned, int totalGold,
 ### LOSE Screen
 
 - Same layout as WIN
-- "Defeat" title (large, red)
+- "Defeat" title (large, red, TextStyle::Title)
 - Gold earned shown as half
 - "Try Again" button → new game (same hero)
 - "Main Menu" button → HOME screen

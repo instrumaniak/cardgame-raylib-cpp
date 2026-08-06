@@ -262,6 +262,14 @@ tasks:
       - T001
     phase: 1
     critical: false
+  T033:
+    name: Typography
+    status: pending
+    depends:
+      - T004
+      - T002
+    phase: 4
+    critical: false
 phases:
   0: Scaffolding
   1: Foundation Types

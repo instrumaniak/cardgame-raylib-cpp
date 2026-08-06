@@ -1,6 +1,6 @@
 # T014: Fog Visibility
 
-## Status: pending
+## Status: done
 ## Phase: 2
 
 ## Goal
@@ -35,11 +35,13 @@ Load these before starting:
 - Pure function, no side effects
 
 ## Acceptance Criteria
-- [ ] Correct visibility for 0 monster-eyes (all 3 rows visible)
-- [ ] Correct visibility for 1 monster-eye (1 row fogged)
-- [ ] Correct visibility for 2+ monster-eyes (2 rows fogged)
-- [ ] Fog correctly hides/shows rows
-- [ ] `make test` passes
+- [x] Correct visibility for 0 monster-eyes (all 3 rows visible)
+- [x] Correct visibility for 1 monster-eye (1 row fogged)
+- [x] Correct visibility for 2+ monster-eyes (2 rows fogged)
+- [x] Fog correctly hides/shows rows
+- [x] `make test` passes
 
 ## Notes
-( filled in during/after implementation )
+- `getNbRowsHidden()` already existed in `src/logic/items.cpp`
+- Created `src/logic/fog.h` (header-only) with `rowVisible()` and `rowFog()`
+- Created `src/logic/test_fog.cpp` with doctest tests

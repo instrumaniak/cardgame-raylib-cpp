@@ -99,7 +99,7 @@ tasks:
     critical: false
   T014:
     name: Fog Visibility
-    status: pending
+    status: done
     depends:
       - T010
     phase: 2

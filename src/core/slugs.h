@@ -29,6 +29,7 @@ inline constexpr std::string_view Map = "map";
 inline constexpr std::string_view Ruby = "ruby";
 inline constexpr std::string_view Emerald = "emerald";
 inline constexpr std::string_view MonsterEgg = "monster-egg";
+inline constexpr std::string_view MonsterEye = "monster-eye";
 
 // Shields
 inline constexpr std::string_view WoodenShield = "wooden-shield";

@@ -43,6 +43,8 @@ Define all item effects, the bag/inventory system, and item interactions.
 | `ruby` | Yes | On gold card: 25% chance of +1 HP |
 | `emerald` | Yes | On monster hit: +4 gold per emerald in bag |
 | `amethyst` | Yes | On gold card: doubles gold value; then removes itself from bag |
+| `invisibility-cloak` | No | Monsters skip attack when hero HP is even |
+| `monster-eye` | Yes | +1 to nb_rows_hidden (reduces visible rows), max 2 |
 
 ### Drop Items
 

@@ -1,6 +1,6 @@
 # T013: Account System
 
-## Status: pending
+## Status: done
 ## Phase: 2
 
 ## Goal
@@ -25,7 +25,7 @@ Load these before starting:
 3. Implement `Account::save()` to JSON
 4. Implement `Account::unlockHero()` (deduct gold, set locked=false)
 5. Implement `Account::spendGold()` and `addGold()`
-6. Default hero table: headless-knight (free), forest-warden (100), cave-shadow (200), desert-nomad (300)
+6. Default hero table (from original game): headless-knight (free, shield 0, bag: map+apple), thief (50g, shield 0, bag: invisibility-cloak+monster-eye), harpy (100g, shield 0, bag: ring-of-vitality), warrior (200g, shield 10, bag: shiny-shield+emerald)
 7. Write unit tests in `test_account.cpp`: unlock hero, insufficient gold, save/load round-trip
 
 ## Constraints
@@ -36,11 +36,16 @@ Load these before starting:
 - Uses nlohmann/json for serialization
 
 ## Acceptance Criteria
-- [ ] Account save/load round-trips correctly
-- [ ] Hero unlock deducts gold
-- [ ] Insufficient gold fails gracefully
-- [ ] Default hero table is correct
-- [ ] `make test` passes
+- [x] Account save/load round-trips correctly
+- [x] Hero unlock deducts gold
+- [x] Insufficient gold fails gracefully
+- [x] Default hero table is correct
+- [x] `make test` passes
 
 ## Notes
-( filled in during/after implementation )
+- Fixed inconsistency: T013 originally listed wrong hero names (forest-warden, cave-shadow, desert-nomad). Replaced with correct original game heroes (thief, harpy, warrior).
+- Added missing `monster-eye` slug to `slugs.h` and `invisibility-cloak`/`monster-eye` to `03-item-effects.md`.
+- Added `shield` field to `Hero` struct in `types.h` (warrior has shield=10).
+- Fixed bug: `getNbRowsHidden()` in `items.cpp` was checking `MonsterEgg` instead of `MonsterEye`.
+- Extra 4 heroes (dark-knight, mage, spirit, anubis) kept in `slugs.h` for future expansion but not included in default account.
+- nlohmann/json used for serialization (header-only, system-wide install).

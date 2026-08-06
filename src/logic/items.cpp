@@ -59,7 +59,7 @@ int getHeroLifeMaxModifier(const std::vector<Card>& items, int heroLifeMax) {
 int getNbRowsHidden(const std::vector<Card>& items) {
   int count = 0;
   for (const auto& item : items) {
-    if (item.slug == Cards::MonsterEgg) {
+    if (item.slug == Cards::MonsterEye) {
       count++;
     }
   }

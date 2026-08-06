@@ -92,7 +92,7 @@ tasks:
     critical: true
   T013:
     name: Account System
-    status: pending
+    status: done
     depends:
       - T003
     phase: 2

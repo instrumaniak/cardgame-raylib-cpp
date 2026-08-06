@@ -30,6 +30,7 @@ struct Hero {
   std::string name;
   std::string description;
   int lifeMax;
+  int shield;
   int cost;
   std::vector<std::string> startingItems;
   int spriteX, spriteY;

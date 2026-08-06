@@ -144,16 +144,16 @@ TEST_CASE("getNbRowsHidden") {
     CHECK(getNbRowsHidden(items) == 0);
   }
 
-  SUBCASE("One egg returns 1") {
-    std::vector<Card> items = {makeItem(Cards::MonsterEgg)};
+  SUBCASE("One monster-eye returns 1") {
+    std::vector<Card> items = {makeItem(Cards::MonsterEye)};
     CHECK(getNbRowsHidden(items) == 1);
   }
 
   SUBCASE("Capped at 2") {
     std::vector<Card> items = {
-      makeItem(Cards::MonsterEgg),
-      makeItem(Cards::MonsterEgg),
-      makeItem(Cards::MonsterEgg),
+      makeItem(Cards::MonsterEye),
+      makeItem(Cards::MonsterEye),
+      makeItem(Cards::MonsterEye),
     };
     CHECK(getNbRowsHidden(items) == 2);
   }

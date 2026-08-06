@@ -9,63 +9,6 @@
 using namespace game;
 using namespace game::logic;
 
-TEST_CASE("getLevelConfig returns correct configs") {
-  SUBCASE("Level 1") {
-    LevelConfig cfg = getLevelConfig(1);
-    CHECK(cfg.rows == 15);
-    CHECK(cfg.monsterRate == 100);
-    CHECK(cfg.shieldRate == 33);
-    CHECK(cfg.healRate == 33);
-    CHECK(cfg.goldRate == 33);
-    CHECK(cfg.itemRate == 1);
-    CHECK(cfg.cardsPerRow[0] == 10);
-    CHECK(cfg.cardsPerRow[1] == 15);
-    CHECK(cfg.cardsPerRow[2] == 75);
-    CHECK(cfg.monsterValues.size() == 9);
-  }
-
-  SUBCASE("Level 4") {
-    LevelConfig cfg = getLevelConfig(4);
-    CHECK(cfg.monsterRate == 113);
-    CHECK(cfg.monsterValues == std::vector<int>{9, 9, 9, 10, 10, 11, 11, 11});
-  }
-
-  SUBCASE("Level 6") {
-    LevelConfig cfg = getLevelConfig(6);
-    CHECK(cfg.cardsPerRow[0] == 25);
-    CHECK(cfg.cardsPerRow[1] == 25);
-    CHECK(cfg.cardsPerRow[2] == 50);
-    CHECK(cfg.monsterValues.size() == 9);
-  }
-}
-
-TEST_CASE("getAvailableBiomes") {
-  SUBCASE("Level 1 — no visited") {
-    auto biomes = getAvailableBiomes(1, {});
-    CHECK(biomes.size() == 4);
-    CHECK(biomes[0] == Cards::Forest);
-    CHECK(biomes[1] == Cards::Cave);
-    CHECK(biomes[2] == Cards::EnchantedLands);
-    CHECK(biomes[3] == Cards::Desert);
-  }
-
-  SUBCASE("Level 1 — one visited") {
-    auto biomes = getAvailableBiomes(1, {"forest"});
-    CHECK(biomes.size() == 3);
-  }
-
-  SUBCASE("Level 2") {
-    auto biomes = getAvailableBiomes(2, {});
-    CHECK(biomes.size() == 1);
-    CHECK(biomes[0] == Cards::Abyss);
-  }
-
-  SUBCASE("Level 3 — all visited") {
-    auto biomes = getAvailableBiomes(3, {"underworld"});
-    CHECK(biomes.empty());
-  }
-}
-
 TEST_CASE("weightedPick returns values proportional to rates") {
   std::mt19937 rng(42);
   std::map<std::string, int> counts;
@@ -211,26 +154,4 @@ TEST_CASE("generateBoard — boss always in center of second-to-last row") {
     CHECK(board.slots[13][1].card.cardType == CardType::Monster);
     CHECK(board.slots[13][1].card.value >= 1);
   }
-}
-
-TEST_CASE("getChestConfig — regular chest") {
-  LevelConfig cfg = getChestConfig(Cards::Chest, 1);
-  CHECK(cfg.rows == 2);
-  CHECK(cfg.itemRate == 70);
-  CHECK(cfg.shieldRate == 10);
-  CHECK(cfg.healRate == 10);
-  CHECK(cfg.goldRate == 10);
-}
-
-TEST_CASE("getChestConfig — golden chest") {
-  LevelConfig cfg = getChestConfig(Cards::GoldenChest, 1);
-  CHECK(cfg.rows == 3);
-  CHECK(cfg.itemRate == 55);
-}
-
-TEST_CASE("getChestConfig — level 5 wider rows") {
-  LevelConfig cfg = getChestConfig(Cards::Chest, 5);
-  CHECK(cfg.cardsPerRow[0] == 20);
-  CHECK(cfg.cardsPerRow[1] == 30);
-  CHECK(cfg.cardsPerRow[2] == 50);
 }

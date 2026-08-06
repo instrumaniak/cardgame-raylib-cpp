@@ -4,6 +4,7 @@
 
 #include "core/entities.h"
 #include "core/types.h"
+#include "logic/level_config.h"
 
 #include <random>
 #include <string>
@@ -37,15 +38,6 @@ T weightedPick(const std::vector<std::pair<T, int>>& rates, std::mt19937& rng) {
   }
   return rates.back().first; // unreachable — dist is [0, total-1]
 }
-
-// Level configuration lookup
-LevelConfig getLevelConfig(int level);
-
-// Chest sub-location configuration
-LevelConfig getChestConfig(std::string_view chestType, int level);
-
-// Available biomes for a level, excluding visited ones
-std::vector<std::string> getAvailableBiomes(int level, const std::vector<std::string>& visited);
 
 // Generate a full board for a level
 GeneratedBoard generateBoard(

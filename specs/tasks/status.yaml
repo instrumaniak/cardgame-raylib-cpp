@@ -106,7 +106,7 @@ tasks:
     critical: false
   T015:
     name: Level Config
-    status: pending
+    status: done
     depends:
       - T003
     phase: 2

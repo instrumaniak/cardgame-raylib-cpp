@@ -1,6 +1,6 @@
 # T015: Level Configuration
 
-## Status: pending
+## Status: done
 ## Phase: 2
 
 ## Goal
@@ -35,10 +35,11 @@ Load these before starting:
 - Data-only functions, no side effects
 
 ## Acceptance Criteria
-- [ ] Correct configs for all 6 levels
-- [ ] Chest configs match spec
-- [ ] Biome exclusion works correctly
-- [ ] `make test` passes
+- [x] Correct configs for all 6 levels
+- [x] Chest configs match spec
+- [x] Biome exclusion works correctly
+- [x] `make test` passes
 
 ## Notes
-( filled in during/after implementation )
+Extracted level config functions from board_gen.h/cpp into separate level_config.h/cpp module.
+Tests expanded to cover all 6 levels, both chest types, and biome exclusion edge cases.

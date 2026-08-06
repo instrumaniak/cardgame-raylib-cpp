@@ -1,6 +1,6 @@
 # T016: Turn Flow Orchestrator
 
-## Status: pending
+## Status: done
 ## Phase: 3
 ## Critical: true
 
@@ -47,15 +47,19 @@ Load these before starting:
 - This is pure logic — no rendering, no I/O
 
 ## Acceptance Criteria
-- [ ] Full turn sequence works end-to-end in pure logic
-- [ ] Status transitions match game/07-turn-flow.md exactly
-- [ ] Monster passive attack triggers correctly from row below
-- [ ] Athelas prevents death once and removes from bag
-- [ ] Chest sub-location entry/exit works
-- [ ] Biome card transitions to new level
-- [ ] Death transitions to Lose status
-- [ ] End card transitions to Win status
-- [ ] `make test` passes with integration tests
+- [x] Full turn sequence works end-to-end in pure logic
+- [x] Status transitions match game/07-turn-flow.md exactly
+- [x] Monster passive attack triggers correctly from row below
+- [x] Athelas prevents death once and removes from bag
+- [x] Chest sub-location entry/exit works
+- [x] Biome card transitions to new level
+- [x] Death transitions to Lose status
+- [x] End card transitions to Win status
+- [x] `make test` passes with integration tests
 
 ## Notes
-( filled in during/after implementation )
+- Added `consumed` field to `CardSlot` in core/entities.h to track played cards
+- Added public `hasItem` and `removeFirstItem` utilities to items.h (refactored from static in card_effects.cpp)
+- Added `spawnLoot` to board_gen for monster-kill loot generation
+- Ring-of-courage is handled inside `applyDamage` (combat layer), not duplicated in turn_flow
+- `resolveMonster` calls `applyAthelas` internally; `nextTurn` has a safety-net check for non-combat deaths

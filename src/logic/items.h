@@ -15,6 +15,10 @@ struct ComboResult {
   std::vector<Card> newItems;
 };
 
+// Item lookup utilities
+bool hasItem(const std::vector<Card>& items, std::string_view slug);
+bool removeFirstItem(std::vector<Card>& items, std::string_view slug);
+
 // Modifier calculations
 int getMonsterCardModifier(const std::vector<Card>& items);
 int getHealCardModifier(const std::vector<Card>& items);

@@ -2,6 +2,7 @@
 #include "logic/board_gen.h"
 
 #include "core/slugs.h"
+#include "logic/items.h"
 
 #include <algorithm>
 
@@ -148,6 +149,33 @@ GeneratedBoard generateBoard(
 
   result.slots = std::move(board);
   return result;
+}
+
+Card spawnLoot(const LevelConfig& config, const std::vector<Card>& items, std::mt19937& rng) {
+  int healRate = config.healRate;
+  int shieldRate = config.shieldRate;
+  int monsterRate = config.monsterRate;
+
+  if (hasItem(items, Cards::Horn)) {
+    healRate += 20;
+  }
+  if (hasItem(items, Cards::Scales)) {
+    shieldRate += 20;
+  }
+  if (hasItem(items, Cards::Fossil)) {
+    monsterRate += 10;
+  }
+
+  std::vector<std::pair<CardType, int>> rates = {
+    {CardType::Monster, monsterRate},
+    {CardType::Shield, shieldRate},
+    {CardType::Heal, healRate},
+    {CardType::Gold, config.goldRate},
+  };
+
+  CardType type = weightedPick<CardType>(rates, rng);
+  int value = pickCardValue(type, config, rng);
+  return makeCard(type, value);
 }
 
 } // namespace game::logic

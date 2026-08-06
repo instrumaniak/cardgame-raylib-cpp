@@ -21,6 +21,7 @@ struct PlayerState {
 struct CardSlot {
   Card card;
   bool revealed;
+  bool consumed = false;
 };
 
 struct VisualEffect {

@@ -7,6 +7,25 @@
 
 namespace game::logic {
 
+bool hasItem(const std::vector<Card>& items, std::string_view slug) {
+  for (const auto& item : items) {
+    if (item.slug == slug) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool removeFirstItem(std::vector<Card>& items, std::string_view slug) {
+  for (auto it = items.begin(); it != items.end(); ++it) {
+    if (it->slug == slug) {
+      items.erase(it);
+      return true;
+    }
+  }
+  return false;
+}
+
 int getMonsterCardModifier(const std::vector<Card>& items) {
   int modifier = 0;
   for (const auto& item : items) {

@@ -47,4 +47,8 @@ GeneratedBoard generateBoard(
   std::mt19937& rng
 );
 
+// Spawn a random loot card after killing a monster
+// Rates are modified by player items: horn(+20 heal), scales(+20 shield), fossil(+10 monster)
+Card spawnLoot(const LevelConfig& config, const std::vector<Card>& items, std::mt19937& rng);
+
 } // namespace game::logic

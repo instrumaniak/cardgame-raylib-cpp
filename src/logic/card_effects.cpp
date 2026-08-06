@@ -7,15 +7,6 @@
 
 namespace game::logic {
 
-static bool hasItem(const std::vector<Card>& items, std::string_view slug) {
-  for (const auto& item : items) {
-    if (item.slug == slug) {
-      return true;
-    }
-  }
-  return false;
-}
-
 CardEffect
 resolveCard(const Card& card, PlayerState& player, std::vector<Card>& items, std::mt19937& rng) {
   switch (card.cardType) {

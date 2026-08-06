@@ -1,6 +1,6 @@
 # T019: Hero Panel
 
-## Status: pending
+## Status: done
 ## Phase: 4
 
 ## Goal
@@ -33,10 +33,15 @@ Left-side panel showing hero state (art, HP, shield, gold, inventory).
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Health bar color-coded correctly
-- [ ] Shield displayed
-- [ ] Gold shown
-- [ ] Inventory icons visible
+- [x] Health bar color-coded correctly
+- [x] Shield displayed
+- [x] Gold shown
+- [x] Inventory icons visible
 
 ## Notes
-( filled in during/after implementation )
+- Added `const Hero& hero` parameter to `drawHeroPanel()` for hero name and sprite coordinates (not in PlayerState)
+- Uses `DrawText()` (raylib built-in) since no font files loaded yet
+- Health bar color-coded: green > 60%, yellow > 30%, red ≤ 30%
+- Shield shown only when > 0
+- Inventory items drawn as 32x32 icons from cards.png spritesheet
+- Formatted with clang-format, compiles clean

@@ -142,7 +142,7 @@ tasks:
     critical: false
   T019:
     name: Hero Panel
-    status: pending
+    status: done
     depends:
       - T003
       - T004

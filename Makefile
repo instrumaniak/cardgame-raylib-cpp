@@ -8,6 +8,7 @@ SRC       := src/main.cpp \
             src/input/input.cpp \
             src/render/card_draw.cpp \
             src/render/board_draw.cpp \
+            src/render/hero_panel.cpp \
             src/logic/items.cpp
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame

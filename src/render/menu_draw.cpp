@@ -14,11 +14,6 @@ using namespace game;
 
 namespace {
 
-constexpr float HERO_CARD_W = 80.0f;
-constexpr float HERO_CARD_H = 112.0f;
-constexpr float HERO_GRID_GAP = 12.0f;
-constexpr int HERO_GRID_COLS = 4;
-constexpr int HERO_GRID_ROWS = 2;
 constexpr float HERO_ART_MARGIN = 8.0f;
 constexpr float LOCK_OVERLAY_ALPHA = 0.6f;
 constexpr float HIGHLIGHT_BORDER = 3.0f;

@@ -24,7 +24,7 @@ int main() {
   layout.init();
 
   game::ScreenManager screens;
-  screens.init();
+  screens.init(res, layout);
   screens.switchTo(game::ScreenID::Home);
 
   while (!WindowShouldClose()) {

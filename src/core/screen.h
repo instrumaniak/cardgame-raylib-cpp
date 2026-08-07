@@ -7,7 +7,16 @@
 
 namespace game {
 
+class ResourceManager;
+class Layout;
+class ScreenManager;
+
 class Screen {
+protected:
+  ResourceManager* _res = nullptr;
+  Layout* _layout = nullptr;
+  ScreenManager* _screenManager = nullptr;
+
 public:
   virtual ~Screen() = default;
 
@@ -16,6 +25,12 @@ public:
   virtual void onExit() {}
   virtual void update(float dt) = 0;
   virtual void draw() = 0;
+
+  void setResources(ResourceManager* res, Layout* layout, ScreenManager* sm) {
+    _res = res;
+    _layout = layout;
+    _screenManager = sm;
+  }
 };
 
 class ScreenManager {
@@ -24,7 +39,7 @@ class ScreenManager {
   Screen* _next = nullptr;
 
 public:
-  void init();
+  void init(ResourceManager& res, Layout& layout);
   void switchTo(ScreenID id);
   void update(float dt);
   void draw();

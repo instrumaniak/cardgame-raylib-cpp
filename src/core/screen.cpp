@@ -1,6 +1,9 @@
 // src/core/screen.cpp — Screen base implementation and ScreenManager state transitions
 #include "core/screen.h"
 
+#include "core/resource.h"
+#include "screens/home_screen.h"
+
 #include <memory>
 
 namespace game {
@@ -28,8 +31,11 @@ public:
 
 } // namespace
 
-void ScreenManager::init() {
-  _screens[screenIndex(ScreenID::Home)] = std::make_unique<PlaceholderScreen>(ScreenID::Home);
+void ScreenManager::init(ResourceManager& res, Layout& layout) {
+  auto home = std::make_unique<HomeScreen>();
+  home->setResources(&res, &layout, this);
+  _screens[screenIndex(ScreenID::Home)] = std::move(home);
+
   _screens[screenIndex(ScreenID::Game)] = std::make_unique<PlaceholderScreen>(ScreenID::Game);
   _screens[screenIndex(ScreenID::Win)] = std::make_unique<PlaceholderScreen>(ScreenID::Win);
   _screens[screenIndex(ScreenID::Lose)] = std::make_unique<PlaceholderScreen>(ScreenID::Lose);

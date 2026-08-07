@@ -16,4 +16,12 @@ constexpr int CARD_HEIGHT = 112;
 constexpr int ROW_HEIGHT = 120;
 constexpr int SLOTS_PER_ROW = 3;
 
+// Hero grid layout (virtual pixels)
+constexpr float HERO_CARD_W = 80.0f;
+constexpr float HERO_CARD_H = 112.0f;
+constexpr float HERO_GRID_GAP = 12.0f;
+constexpr int HERO_GRID_COLS = 4;
+constexpr int HERO_GRID_ROWS = 2;
+constexpr float HERO_GRID_Y = 120.0f;
+
 } // namespace game

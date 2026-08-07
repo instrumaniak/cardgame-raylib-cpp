@@ -1,6 +1,6 @@
 # T023: Home Screen
 
-## Status: pending
+## Status: done
 ## Phase: 5
 
 ## Goal
@@ -33,10 +33,13 @@ HomeScreen that handles hero selection, account display, and game start.
 - Uses Screen base, override on all virtuals, calls render:: functions
 
 ## Acceptance Criteria
-- [ ] Hero grid displays
-- [ ] Selection works
-- [ ] Start button launches game
-- [ ] Locked hero unlock works
+- [x] Hero grid displays
+- [x] Selection works
+- [x] Start button launches game
+- [x] Locked hero unlock works
 
 ## Notes
-( filled in during/after implementation )
+- Added `ResourceManager*`, `Layout*`, `ScreenManager*` to Screen base class for screen access to resources
+- Extracted hero grid constants to `core/constants.h` to avoid duplication between hit-test and draw
+- Account loads from `save.json` on enter, saves after hero unlock
+- Hero display names derived from slugs (e.g. "headless-knight" → "Headless Knight")

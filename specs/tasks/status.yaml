@@ -174,7 +174,7 @@ tasks:
     critical: false
   T023:
     name: Home Screen
-    status: pending
+    status: done
     depends:
       - T006
       - T013

@@ -124,8 +124,7 @@ void drawLoseOverlay(
   float screenWidth,
   float screenHeight
 ) {
-  int displayGold = (goldEarned + 1) / 2;
-  OverlayConfig config = {"Defeat", RED, displayGold};
+  OverlayConfig config = {"Defeat", RED, goldEarned};
   drawOverlay(
     res, config, heroName, totalGold, score, primaryBtn, mainMenuBtn, screenWidth, screenHeight
   );

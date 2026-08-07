@@ -15,8 +15,14 @@ SRC       := src/main.cpp \
             src/render/menu_draw.cpp \
             src/render/overlay.cpp \
             src/screens/home_screen.cpp \
+            src/screens/game_screen.cpp \
             src/logic/items.cpp \
-            src/logic/account.cpp
+            src/logic/account.cpp \
+            src/logic/level_config.cpp \
+            src/logic/board_gen.cpp \
+            src/logic/turn_flow.cpp \
+            src/logic/combat.cpp \
+            src/logic/card_effects.cpp
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 TARGET    := build/cardgame
 

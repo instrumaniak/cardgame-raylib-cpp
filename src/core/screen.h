@@ -25,6 +25,7 @@ public:
   virtual void onExit() {}
   virtual void update(float dt) = 0;
   virtual void draw() = 0;
+  virtual void setSelectedHero(const Hero&) {}
 
   void setResources(ResourceManager* res, Layout* layout, ScreenManager* sm) {
     _res = res;
@@ -44,6 +45,8 @@ public:
   void update(float dt);
   void draw();
   ScreenID currentId() const;
+  Screen* getScreen(ScreenID id);
+  void setSelectedHero(ScreenID id, const Hero& hero);
 };
 
 } // namespace game

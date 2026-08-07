@@ -183,7 +183,7 @@ tasks:
     critical: false
   T024:
     name: Game Screen
-    status: pending
+    status: done
     depends:
       - T006
       - T009

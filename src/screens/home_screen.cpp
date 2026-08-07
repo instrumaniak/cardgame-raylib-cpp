@@ -111,7 +111,7 @@ void HomeScreen::buildHeroGrid() {
 void HomeScreen::handleClick(Vector2 mousePos) {
   if (CheckCollisionPointRec(mousePos, _startButton.bounds)) {
     if (_selectedIndex >= 0 && !_heroes[_selectedIndex].locked) {
-      // TODO: pass selected hero to game screen
+      _screenManager->setSelectedHero(ScreenID::Game, _heroes[_selectedIndex]);
       _screenManager->switchTo(ScreenID::Game);
     }
     return;

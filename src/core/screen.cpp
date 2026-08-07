@@ -2,6 +2,7 @@
 #include "core/screen.h"
 
 #include "core/resource.h"
+#include "screens/game_screen.h"
 #include "screens/home_screen.h"
 
 #include <memory>
@@ -36,7 +37,9 @@ void ScreenManager::init(ResourceManager& res, Layout& layout) {
   home->setResources(&res, &layout, this);
   _screens[screenIndex(ScreenID::Home)] = std::move(home);
 
-  _screens[screenIndex(ScreenID::Game)] = std::make_unique<PlaceholderScreen>(ScreenID::Game);
+  auto game = std::make_unique<GameScreen>();
+  game->setResources(&res, &layout, this);
+  _screens[screenIndex(ScreenID::Game)] = std::move(game);
   _screens[screenIndex(ScreenID::Win)] = std::make_unique<PlaceholderScreen>(ScreenID::Win);
   _screens[screenIndex(ScreenID::Lose)] = std::make_unique<PlaceholderScreen>(ScreenID::Lose);
 
@@ -78,6 +81,14 @@ ScreenID ScreenManager::currentId() const {
   }
 
   return ScreenID::Home;
+}
+
+Screen* ScreenManager::getScreen(ScreenID id) {
+  return _screens[screenIndex(id)].get();
+}
+
+void ScreenManager::setSelectedHero(ScreenID id, const Hero& hero) {
+  _screens[screenIndex(id)]->setSelectedHero(hero);
 }
 
 } // namespace game

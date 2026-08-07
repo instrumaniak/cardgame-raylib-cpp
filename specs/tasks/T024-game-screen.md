@@ -1,6 +1,6 @@
 # T024: Game Screen
 
-## Status: pending
+## Status: done
 ## Phase: 5
 ## Critical: true
 
@@ -45,4 +45,8 @@ GameScreen that orchestrates the full gameplay loop.
 - [ ] Hero panel shows state
 
 ## Notes
-( filled in during/after implementation )
+- Added `getScreen(ScreenID)` to ScreenManager for inter-screen hero passing
+- Added missing logic .cpp files to Makefile (level_config, board_gen, turn_flow, combat, card_effects)
+- No animation delays yet (deferred to T028)
+- Score formula: goldEarned + currentLevel * 10
+- HeroDrop/MonsterAttack states transition immediately (T028 will add timing)

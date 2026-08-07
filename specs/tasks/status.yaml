@@ -150,7 +150,7 @@ tasks:
     critical: false
   T020:
     name: Hud Rendering
-    status: pending
+    status: done
     depends:
       - T003
       - T004

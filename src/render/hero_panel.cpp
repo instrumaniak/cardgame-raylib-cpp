@@ -5,6 +5,7 @@
 #include "core/colors.h"
 #include "core/constants.h"
 #include "core/res_keys.h"
+#include "core/typography.h"
 #include "raylib.h"
 
 namespace game::render {
@@ -69,14 +70,8 @@ void drawHeroPanel(
 
   // Hero name
   const char* nameText = hero.name.c_str();
-  int nameWidth = MeasureText(nameText, 20);
-  DrawText(
-    nameText,
-    static_cast<int>(x + (PANEL_WIDTH - nameWidth) / 2),
-    static_cast<int>(cursorY),
-    20,
-    WHITE
-  );
+  Vector2 nameSize = measureText(res, TextStyle::Body, nameText);
+  drawText(res, TextStyle::Body, nameText, x + (PANEL_WIDTH - nameSize.x) / 2, cursorY, WHITE);
   cursorY += 28 + SECTION_GAP;
 
   // Health bar
@@ -97,12 +92,13 @@ void drawHeroPanel(
 
   char healthText[32];
   snprintf(healthText, sizeof(healthText), "%d/%d", player.health.current, player.health.max);
-  int healthTextWidth = MeasureText(healthText, 12);
-  DrawText(
+  Vector2 healthSize = measureText(res, TextStyle::Label, healthText);
+  drawText(
+    res,
+    TextStyle::Label,
     healthText,
-    static_cast<int>(barX + (HEALTH_BAR_WIDTH - healthTextWidth) / 2),
-    static_cast<int>(cursorY + 1),
-    12,
+    barX + (HEALTH_BAR_WIDTH - healthSize.x) / 2,
+    cursorY + 1,
     WHITE
   );
 
@@ -118,12 +114,13 @@ void drawHeroPanel(
 
     char shieldText[32];
     snprintf(shieldText, sizeof(shieldText), "Shield: %d", player.shield.value);
-    int shieldTextWidth = MeasureText(shieldText, 10);
-    DrawText(
+    Vector2 shieldSize = measureText(res, TextStyle::Label, shieldText);
+    drawText(
+      res,
+      TextStyle::Label,
       shieldText,
-      static_cast<int>(barSX + (shieldBarWidth - shieldTextWidth) / 2),
-      static_cast<int>(cursorY + 1),
-      10,
+      barSX + (shieldBarWidth - shieldSize.x) / 2,
+      cursorY + 1,
       WHITE
     );
 
@@ -133,13 +130,9 @@ void drawHeroPanel(
   // Gold display
   char goldText[32];
   snprintf(goldText, sizeof(goldText), "Gold: %d", player.gold.amount);
-  int goldTextWidth = MeasureText(goldText, 14);
-  DrawText(
-    goldText,
-    static_cast<int>(x + (PANEL_WIDTH - goldTextWidth) / 2),
-    static_cast<int>(cursorY),
-    14,
-    Colors::GoldBg
+  Vector2 goldSize = measureText(res, TextStyle::Label, goldText);
+  drawText(
+    res, TextStyle::Label, goldText, x + (PANEL_WIDTH - goldSize.x) / 2, cursorY, Colors::GoldBg
   );
 
   cursorY += 22 + SECTION_GAP;
@@ -147,12 +140,9 @@ void drawHeroPanel(
   // Inventory
   const auto& items = player.inventory.items;
   if (!items.empty()) {
-    DrawText(
-      "Inventory",
-      static_cast<int>(x + (PANEL_WIDTH - MeasureText("Inventory", 12)) / 2),
-      static_cast<int>(cursorY),
-      12,
-      WHITE
+    Vector2 invLabelSize = measureText(res, TextStyle::Label, "Inventory");
+    drawText(
+      res, TextStyle::Label, "Inventory", x + (PANEL_WIDTH - invLabelSize.x) / 2, cursorY, WHITE
     );
     cursorY += 18;
 

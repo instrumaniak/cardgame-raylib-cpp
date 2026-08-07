@@ -4,6 +4,7 @@
 
 #include "core/colors.h"
 #include "core/res_keys.h"
+#include "core/typography.h"
 #include "raylib.h"
 
 #include <algorithm>
@@ -110,13 +111,13 @@ void drawCard(
 
   // 4. Card name at top
   if (card.name.size() > 0) {
-    DrawText(card.name.c_str(), x + 4, y + 4, 10, WHITE);
+    drawText(res, TextStyle::Label, card.name.c_str(), x + 4, y + 4, WHITE);
   }
 
   // 5. Card value at bottom
   const char* valueText = TextFormat("%d", card.value);
-  int valueWidth = MeasureText(valueText, 14);
-  DrawText(valueText, x + (w - valueWidth) / 2, y + h - 18, 14, WHITE);
+  Vector2 valueSize = measureText(res, TextStyle::CardStat, valueText);
+  drawText(res, TextStyle::CardStat, valueText, x + (w - valueSize.x) / 2, y + h - 18, WHITE);
 }
 
 void drawCardBack(const ResourceManager& res, float x, float y, float w, float h) {

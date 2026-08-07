@@ -1,6 +1,6 @@
 # T033: Typography
 
-## Status: pending
+## Status: done
 ## Phase: 4
 
 ## Goal
@@ -41,14 +41,14 @@ Load these before starting:
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] `src/core/typography.h` and `src/core/typography.cpp` exist and compile
-- [ ] `FntKeys::PearSoda` and `FntKeys::Zepto` constants added to `res_keys.h`
-- [ ] `drawText()` renders correct font + size for each `TextStyle`
-- [ ] `measureText()` returns correct dimensions for each `TextStyle`
-- [ ] `card_draw.cpp` uses `drawText()` instead of raw `DrawText()`
-- [ ] `hero_panel.cpp` uses `drawText()` instead of raw `DrawText()`
-- [ ] `make` succeeds without errors
-- [ ] `make format-check` passes
+- [x] `src/core/typography.h` and `src/core/typography.cpp` exist and compile
+- [x] `FntKeys::PearSoda` and `FntKeys::Zepto` constants added to `res_keys.h`
+- [x] `drawText()` renders correct font + size for each `TextStyle`
+- [x] `measureText()` returns correct dimensions for each `TextStyle`
+- [x] `card_draw.cpp` uses `drawText()` instead of raw `DrawText()`
+- [x] `hero_panel.cpp` uses `drawText()` instead of raw `DrawText()`
+- [x] `make` succeeds without errors
+- [x] `make format-check` passes
 
 ## Notes
 - Original game CSS uses: PearSoda for `.hero`/`.card` elements, Zepto-Regular as body default

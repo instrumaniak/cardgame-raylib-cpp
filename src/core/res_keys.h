@@ -14,3 +14,8 @@ inline constexpr std::string_view HeroFrame = "hero-frame";
 inline constexpr std::string_view ChestFrame = "chest-frame";
 inline constexpr std::string_view LightFrame = "light-frame";
 } // namespace game::TexKeys
+
+namespace game::FntKeys {
+inline constexpr std::string_view PearSoda = "PearSoda";
+inline constexpr std::string_view Zepto = "Zepto-Regular";
+} // namespace game::FntKeys

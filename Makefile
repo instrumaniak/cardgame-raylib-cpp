@@ -5,6 +5,7 @@ SRC       := src/main.cpp \
             src/core/resource.cpp \
             src/core/layout.cpp \
             src/core/screen.cpp \
+            src/core/typography.cpp \
             src/input/input.cpp \
             src/render/card_draw.cpp \
             src/render/board_draw.cpp \

@@ -264,7 +264,7 @@ tasks:
     critical: false
   T033:
     name: Typography
-    status: pending
+    status: done
     depends:
       - T004
       - T002

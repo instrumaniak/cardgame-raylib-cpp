@@ -241,17 +241,23 @@ void drawGoldDisplay(const ResourceManager& res, int gold);
 ## WIN/LOSE Screens (drawn as overlays in game_screen::draw)
 
 ```cpp
-// src/screens/win_screen.h and lose_screen.h
+// src/render/overlay.h
 #pragma once
-#include "core/types.h"
 #include "core/resource.h"
+#include "core/types.h"
+
+#include <string>
 
 namespace game::render {
 
-void drawWinOverlay(const ResourceManager& res, int goldEarned, int totalGold,
-                    int score, float screenW, float screenH);
-void drawLoseOverlay(const ResourceManager& res, int goldEarned, int totalGold,
-                     int score, float screenW, float screenH);
+void drawWinOverlay(const ResourceManager& res, const std::string& heroName,
+                    int goldEarned, int totalGold, int score,
+                    Button& primaryBtn, Button& mainMenuBtn,
+                    float screenWidth, float screenHeight);
+void drawLoseOverlay(const ResourceManager& res, const std::string& heroName,
+                     int goldEarned, int totalGold, int score,
+                     Button& primaryBtn, Button& mainMenuBtn,
+                     float screenWidth, float screenHeight);
 
 } // namespace game::render
 ```

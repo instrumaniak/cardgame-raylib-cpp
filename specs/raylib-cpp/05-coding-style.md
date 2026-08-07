@@ -1539,8 +1539,8 @@ The existing specs (01-architecture.md through 04-build-test.md) use `snake_case
 | `draw_hero_grid()` | `drawHeroGrid()` | menu_draw.h |
 | `draw_start_button()` | `drawStartButton()` | menu_draw.h |
 | `draw_gold_display()` | `drawGoldDisplay()` | menu_draw.h |
-| `draw_win_overlay()` | `drawWinOverlay()` | win_screen.h |
-| `draw_lose_overlay()` | `drawLoseOverlay()` | lose_screen.h |
+| `draw_win_overlay()` | `drawWinOverlay()` | overlay.h |
+| `draw_lose_overlay()` | `drawLoseOverlay()` | overlay.h |
 
 #### From `anim/`
 

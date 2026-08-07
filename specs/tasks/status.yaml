@@ -166,7 +166,7 @@ tasks:
     critical: false
   T022:
     name: Win Lose Overlays
-    status: pending
+    status: done
     depends:
       - T003
       - T004

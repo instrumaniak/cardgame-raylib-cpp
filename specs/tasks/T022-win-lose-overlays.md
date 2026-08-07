@@ -1,6 +1,6 @@
 # T022: Win/Lose Overlays
 
-## Status: pending
+## Status: done
 ## Phase: 4
 
 ## Goal
@@ -14,10 +14,8 @@ Win and lose overlay screens with stats and action buttons.
 - `raylib-cpp/03-ui-systems.md` → "WIN/LOSE Screens" section
 
 ## Files to Create/Modify
-- `src/render/win_overlay.h` (NEW)
-- `src/render/win_overlay.cpp` (NEW)
-- `src/render/lose_overlay.h` (NEW)
-- `src/render/lose_overlay.cpp` (NEW)
+- `src/render/overlay.h` (NEW)
+- `src/render/overlay.cpp` (NEW)
 
 ## Implementation Steps
 1. Create overlay headers with `drawWinOverlay()` and `drawLoseOverlay()` in `game::render::`
@@ -32,9 +30,15 @@ Win and lose overlay screens with stats and action buttons.
 - Follow `specs/raylib-cpp/05-coding-style.md`
 
 ## Acceptance Criteria
-- [ ] Win shows full gold
-- [ ] Lose shows half gold
-- [ ] Buttons visible and positioned correctly
+- [x] Win shows full gold
+- [x] Lose shows half gold
+- [x] Buttons visible and positioned correctly
 
 ## Notes
-( filled in during/after implementation )
+- Merged win/lose into single `overlay.h`/`overlay.cpp` with shared `drawOverlay()` helper
+- Added `heroName` param to both signatures (required by task but missing from spec)
+- Added `Button&` params for Play Again/Try Again and Main Menu (enables hit-testing by caller, matches menu_draw.cpp pattern)
+- Lose overlay displays `(goldEarned + 1) / 2` (rounding, not truncation)
+- `screenWidth`/`screenHeight` naming follows coding style (no abbreviations)
+- Buttons positioned side-by-side centered below stats
+- Build: 0 warnings, format clean, 93 tests pass

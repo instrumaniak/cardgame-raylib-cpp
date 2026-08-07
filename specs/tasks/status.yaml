@@ -158,7 +158,7 @@ tasks:
     critical: false
   T021:
     name: Menu Rendering
-    status: pending
+    status: done
     depends:
       - T003
       - T004

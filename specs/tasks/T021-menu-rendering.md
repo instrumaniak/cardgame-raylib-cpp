@@ -1,6 +1,6 @@
 # T021: Menu Rendering
 
-## Status: pending
+## Status: done
 ## Phase: 4
 
 ## Goal
@@ -37,4 +37,8 @@ HOME screen UI (title, hero grid, start button, gold display).
 - [ ] Gold displayed
 
 ## Notes
-( filled in during/after implementation )
+- Used text-based "LOCKED" label instead of icon (no lock texture available)
+- Gold display uses gold-colored text (no coin texture, consistent with hero_panel)
+- Start button uses green background with hover state
+- Selected hero gets golden highlight border
+- All functions use typography system (drawText/measureText) consistently
